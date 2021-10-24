@@ -212,6 +212,7 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	void onClickSlabDesign(ActionEvent event) {
+		
 
 		String slabname = rcSlabName.getText();
 		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
