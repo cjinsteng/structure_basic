@@ -246,6 +246,56 @@
                               </VBox>
                            </children>
                         </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox prefHeight="150.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Load">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DeadLoad   :" textAlignment="RIGHT">
+                                             <padding>
+                                                <Insets left="10.0" right="20.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="rcSlabDL">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LiveLoad   :" textAlignment="RIGHT">
+                                             <padding>
+                                                <Insets left="10.0" right="20.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="rcSlabLL">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
                         <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
                            <children>
                               <RadioButton fx:id="rcSlabWay1" mnemonicParsing="false" onAction="#onRcSlabWay1" text="1-Way">
@@ -268,81 +318,6 @@
                         </HBox>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <VBox fx:id="rcSlabWay2Table" prefHeight="300.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay21" mnemonicParsing="false" text="2">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="way2group" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay22" mnemonicParsing="false" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay23" mnemonicParsing="false" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay24" mnemonicParsing="false" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
                               <VBox fx:id="rcSlabWay1Table" prefHeight="300.0" prefWidth="200.0">
                                  <children>
                                     <HBox prefHeight="50.0" prefWidth="200.0">
@@ -367,7 +342,7 @@
                                     </HBox>
                                     <HBox prefHeight="50.0" prefWidth="200.0">
                                        <children>
-                                          <RadioButton fx:id="rcSlabWay12" mnemonicParsing="false" toggleGroup="$way1group">
+                                          <RadioButton fx:id="rcSlabWay12" mnemonicParsing="false" text="2" toggleGroup="$way1group">
                                              <HBox.margin>
                                                 <Insets left="40.0" top="10.0" />
                                              </HBox.margin>
@@ -384,7 +359,7 @@
                                     </HBox>
                                     <HBox prefHeight="50.0" prefWidth="200.0">
                                        <children>
-                                          <RadioButton fx:id="rcSlabWay13" mnemonicParsing="false" toggleGroup="$way1group">
+                                          <RadioButton fx:id="rcSlabWay13" mnemonicParsing="false" text="3" toggleGroup="$way1group">
                                              <HBox.margin>
                                                 <Insets left="40.0" top="10.0" />
                                              </HBox.margin>
@@ -401,7 +376,7 @@
                                     </HBox>
                                     <HBox prefHeight="50.0" prefWidth="200.0">
                                        <children>
-                                          <RadioButton fx:id="rcSlabWay14" mnemonicParsing="false" toggleGroup="$way1group">
+                                          <RadioButton fx:id="rcSlabWay14" mnemonicParsing="false" text="4" toggleGroup="$way1group">
                                              <HBox.margin>
                                                 <Insets left="40.0" top="10.0" />
                                              </HBox.margin>
@@ -415,6 +390,151 @@
                                        <VBox.margin>
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="rcSlabWay2Table" prefHeight="300.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay21" mnemonicParsing="false" text="1">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="way2group" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay22" mnemonicParsing="false" text="2" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay23" mnemonicParsing="false" text="3" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay24" mnemonicParsing="false" text="4" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay25" mnemonicParsing="false" text="5" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay26" mnemonicParsing="false" text="6" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay27" mnemonicParsing="false" text="7" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay28" mnemonicParsing="false" text="8" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="rcSlabWay29" mnemonicParsing="false" text="9" toggleGroup="$way2group">
+                                             <HBox.margin>
+                                                <Insets left="40.0" top="10.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
                                     </HBox>
                                  </children>
                               </VBox>

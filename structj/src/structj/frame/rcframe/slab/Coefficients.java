@@ -9,7 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Coefficients {
 	// 엑셀에 있는 모멘트 계수 불러오기
-	public static void momentcofficientsAll(int a) { // a : 시트번호
+	public static void momentcoefficientsAll(int a) { // a : 시트번호
 
 		try {
 			FileInputStream file = new FileInputStream(
@@ -73,7 +73,9 @@ public class Coefficients {
 	}
 
 	// 엑셀에 있는 모멘트 계수 불러오기
-	public static void momentcofficients(int a, int rowdex, int coldex) { // a : 시트번호
+	public static double momentcoefficients(int a, int coldex, int rowdex) { // a : 시트번호
+
+		double coeff;
 
 		try {
 			FileInputStream file = new FileInputStream(
@@ -88,32 +90,946 @@ public class Coefficients {
 			XSSFRow row = sheet.getRow(rowindex);
 			XSSFCell cell = row.getCell(columnindex);
 			String value = "";
+			double value1 = 0;
+			boolean value2;
+			byte value3;
+			
+			
 			// 타입별로 내용읽기
-			switch (cell.getCellType()) {
+			switch (cell.getCellType()) {			//우선은 숫자만 가져옴....엑셀이 숫자 문자 불린 너무 다양해서 작업필요
 			case XSSFCell.CELL_TYPE_FORMULA:
 				value = cell.getCellFormula();
 				break;
 			case XSSFCell.CELL_TYPE_NUMERIC:
-				value = cell.getNumericCellValue() + "";
+				value1 = cell.getNumericCellValue();
 				break;
 			case XSSFCell.CELL_TYPE_STRING:
-				value = cell.getStringCellValue() + "";
+				value = cell.getStringCellValue();
 				break;
 			case XSSFCell.CELL_TYPE_BLANK:
-				value = cell.getBooleanCellValue() + "";
+				value2 = cell.getBooleanCellValue();
 				break;
 			case XSSFCell.CELL_TYPE_ERROR:
-				value = cell.getErrorCellValue() + "";
+				value3 = cell.getErrorCellValue();
 				break;
 			}
-			System.out.println(columnindex);
-			System.out.println(rowindex);
-			System.out.println(value);
+			System.out.println(value1);
+			System.out.println("ok");
+			coeff = value1;
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("NG");
+			coeff = 0;
 		}
+
+		return coeff;
+
+	}
+
+	public static void moment(Double xlength, Double ylength, Double deadload, Double liveload, int slabcase, int slabtype) {
+		System.out.println(xlength);
+		System.out.println(ylength);
+		System.out.println(deadload);
+		System.out.println(liveload);
+		System.out.println(slabcase);
+		System.out.println(slabtype);
+		System.out.println(momentcoefficients(0, 1, 1));
+				
+		double lenRatio = ylength / xlength;
+		int a = 2; // 시트갯수 3개(0,1,2) 3시트는 전단
+		double[][] dbs = new double[4][1];
+		double gap = 0.05;
+		double x1;
+		double x2;
+		double y1;
+		double y2;
+
+		if (slabcase == 1) {
+			// 1-way슬래브 모멘트 출력
+			System.out.println("아직");
+
+		} else if (slabcase == 2) {
+			// 2-way슬래브 모멘트 출력
+			System.out.println("s");
+			System.out.println(lenRatio);
+			System.out.println(slabtype);
+			switch (slabtype) {
+			case 1:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						System.out.println("?");
+						System.out.println(x1);
+						System.out.println(x2);
+						System.out.println(y1);
+						System.out.println(y2);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
+						System.out.println("aaa");
+						System.out.println(momentShort);
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+						System.out.println(dbs[0][1]);
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 2:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 3:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 4:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 5:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 6:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 7:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 8:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+			case 9:
+				for (int i = 0; i < a; i++) {
+					if (lenRatio >= 0.95) {
+						x1 = momentcoefficients(i, slabtype, 1);
+						x2 = momentcoefficients(i, slabtype, 3);
+						y1 = momentcoefficients(i, slabtype, 2);
+						y2 = momentcoefficients(i, slabtype, 4);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+
+					} else if (lenRatio >= 0.9) {
+						x1 = momentcoefficients(i, slabtype, 3);
+						x2 = momentcoefficients(i, slabtype, 5);
+						y1 = momentcoefficients(i, slabtype, 4);
+						y2 = momentcoefficients(i, slabtype, 6);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					} else if (lenRatio >= 0.85) {
+						x1 = momentcoefficients(i, slabtype, 5);
+						x2 = momentcoefficients(i, slabtype, 7);
+						y1 = momentcoefficients(i, slabtype, 6);
+						y2 = momentcoefficients(i, slabtype, 8);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.8) {
+						x1 = momentcoefficients(i, slabtype, 7);
+						x2 = momentcoefficients(i, slabtype, 9);
+						y1 = momentcoefficients(i, slabtype, 8);
+						y2 = momentcoefficients(i, slabtype, 10);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.75) {
+						x1 = momentcoefficients(i, slabtype, 9);
+						x2 = momentcoefficients(i, slabtype, 11);
+						y1 = momentcoefficients(i, slabtype, 10);
+						y2 = momentcoefficients(i, slabtype, 12);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.7) {
+						x1 = momentcoefficients(i, slabtype, 11);
+						x2 = momentcoefficients(i, slabtype, 13);
+						y1 = momentcoefficients(i, slabtype, 12);
+						y2 = momentcoefficients(i, slabtype, 14);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.65) {
+						x1 = momentcoefficients(i, slabtype, 13);
+						x2 = momentcoefficients(i, slabtype, 15);
+						y1 = momentcoefficients(i, slabtype, 14);
+						y2 = momentcoefficients(i, slabtype, 16);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.6) {
+						x1 = momentcoefficients(i, slabtype, 15);
+						x2 = momentcoefficients(i, slabtype, 17);
+						y1 = momentcoefficients(i, slabtype, 16);
+						y2 = momentcoefficients(i, slabtype, 18);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.55) {
+						x1 = momentcoefficients(i, slabtype, 17);
+						x2 = momentcoefficients(i, slabtype, 19);
+						y1 = momentcoefficients(i, slabtype, 18);
+						y2 = momentcoefficients(i, slabtype, 20);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}else if (lenRatio >= 0.5) {
+						x1 = momentcoefficients(i, slabtype, 19);
+						x2 = momentcoefficients(i, slabtype, 21);
+						y1 = momentcoefficients(i, slabtype, 20);
+						y2 = momentcoefficients(i, slabtype, 22);
+						double momentShort = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
+						dbs[i][0] = momentShort;
+						dbs[i][1] = momentLong;
+					}
+				}
+				System.out.println(dbs[0][1]);
+				break;
+				
+
+			default:
+				System.out.println("ㅠㅠ");
+				break;
+			}
+		} else {
+			System.out.println("slabcase error");
+		}
+
 	}
 }

@@ -3,9 +3,6 @@ package structj.frame.rcframe.slab;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.accessibility.internal.resources.accessibility;
-import com.sun.xml.internal.bind.v2.runtime.Name;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class MainRcSlabController implements Initializable {
-	
+
 	//
 	@FXML
 	public TextField rcSlabName;
@@ -36,7 +33,8 @@ public class MainRcSlabController implements Initializable {
 	@FXML
 	private ComboBox<String> rebarDia1;
 
-	ObservableList<String> list = FXCollections.observableArrayList("D10", "D13");
+	ObservableList<String> list = FXCollections.observableArrayList("D10", "D13", "D16", "D19", "D22", "D25", "D29",
+			"D32");
 
 	@FXML
 	private TextField RebarFy1;
@@ -44,7 +42,8 @@ public class MainRcSlabController implements Initializable {
 	@FXML
 	private ComboBox<String> rebarDia2;
 
-	ObservableList<String> list2 = FXCollections.observableArrayList("D10", "D13");
+	ObservableList<String> list2 = FXCollections.observableArrayList("D10", "D13", "D16", "D19", "D22", "D25", "D29",
+			"D32");
 
 	@FXML
 	private TextField rebarFy2;
@@ -60,6 +59,12 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	private TextField rcSlabCover;
+
+	@FXML
+	private TextField rcSlabDL;
+
+	@FXML
+	private TextField rcSlabLL;
 
 	@FXML
 	private ToggleGroup slabgroup;
@@ -99,6 +104,21 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	private RadioButton rcSlabWay24;
+
+	@FXML
+	private RadioButton rcSlabWay25;
+
+	@FXML
+	private RadioButton rcSlabWay26;
+
+	@FXML
+	private RadioButton rcSlabWay27;
+
+	@FXML
+	private RadioButton rcSlabWay28;
+
+	@FXML
+	private RadioButton rcSlabWay29;
 
 	@FXML
 	private VBox rcSlabWay1Table;
@@ -173,8 +193,8 @@ public class MainRcSlabController implements Initializable {
 	void onClickSlabCheck(ActionEvent event) {
 		System.out.println(rcSlabName);
 		String slabname = rcSlabName.getText();
-		int slabcon = Integer.parseInt(rcSlabCon.getText());	//gettext는 String Integer를 써서 int로 변환.
-		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1));		//substring > 문자열 몇번째부터 가져올것인지.
+		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
+		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
 		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
 		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
 		String slabrebar2 = rebarFy2.getText();
@@ -182,22 +202,32 @@ public class MainRcSlabController implements Initializable {
 		String slabspany = rcSlabSpany.getText();
 		String slabthk = rcSlabThk.getText();
 		String slabcover = rcSlabCover.getText();
-		
-	
+
 		CalculateSlab nam = new CalculateSlab();
 
 		nam.first(slabname, slabcon);
 		System.out.println(dia1);
 
-		
 	}
 
 	@FXML
 	void onClickSlabDesign(ActionEvent event) {
+
+		String slabname = rcSlabName.getText();
+		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
+		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
+		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
+		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
+		String slabrebar2 = rebarFy2.getText();
+		double slabspanx = Integer.parseInt(rcSlabSpanx.getText());
+		double slabspany = Integer.parseInt(rcSlabSpany.getText());
+		String slabthk = rcSlabThk.getText();
+		String slabcover = rcSlabCover.getText();
+		double slabdl = Integer.parseInt(rcSlabDL.getText());
+		double slabll = Integer.parseInt(rcSlabLL.getText());
+
+		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
 		
-		Coefficients.momentcofficients(1, 1, 2);
-
-
 	}
 
 	// 실행화면

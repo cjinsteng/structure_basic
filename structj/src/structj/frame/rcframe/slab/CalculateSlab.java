@@ -11,7 +11,7 @@ public class CalculateSlab {
 	// String name = rc.rcSlabName.getText();
 
 	public void first(String name, int b) {
-		System.out.println(b + name);
+		System.out.println(b + b + name);
 
 	}
 
