@@ -46,7 +46,7 @@ public class MainRcSlabController implements Initializable {
 			"D32");
 
 	@FXML
-	private TextField rebarFy2;
+	private TextField RebarFy2;
 
 	@FXML
 	private TextField rcSlabSpanx;
@@ -135,6 +135,9 @@ public class MainRcSlabController implements Initializable {
 
 		rcSlabWay1Table.setVisible(false);
 		rcSlabWay2Table.setVisible(false);
+		
+		rebarDia1.setValue("D13");
+		rebarDia2.setValue("D16");
 
 		// 1. 표 라인 생성
 		slabSheet1.setGridLinesVisible(true);
@@ -144,7 +147,7 @@ public class MainRcSlabController implements Initializable {
 		slabSpany.setText("4.00m");
 		slabThk.setText("150mm");
 		slabFck.setText("24Mpa");
-		slabFy.setText("400Mpa");
+		slabFy1.setText("400Mpa");
 
 		// 2.
 		slabSheet2.setGridLinesVisible(true);
@@ -191,44 +194,71 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	void onClickSlabCheck(ActionEvent event) {
-		System.out.println(rcSlabName);
 		String slabname = rcSlabName.getText();
 		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
 		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
 		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
 		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
-		String slabrebar2 = rebarFy2.getText();
-		String slabspanx = rcSlabSpanx.getText();
-		String slabspany = rcSlabSpany.getText();
-		String slabthk = rcSlabThk.getText();
-		String slabcover = rcSlabCover.getText();
+		int slabrebar2 = Integer.parseInt(RebarFy2.getText());
+		double slabspanx = Double.parseDouble(rcSlabSpanx.getText());
+		double slabspany = Double.parseDouble(rcSlabSpany.getText());
+		int slabthk = Integer.parseInt(rcSlabThk.getText());
+		double slabcover = Double.parseDouble(rcSlabCover.getText());
+		double slabdl = Double.parseDouble(rcSlabDL.getText());
+		double slabll = Double.parseDouble(rcSlabLL.getText());
 
-		CalculateSlab nam = new CalculateSlab();
+		// 실행화면
+		slabSpanx.setText(String.format("%.2f", slabspanx) + " m");
+		slabSpany.setText(String.format("%.2f", slabspany) + " m");
+		slabThk.setText(slabthk + " mm");
+		slabFck.setText(slabcon + " MPa");
+		slabFck.setText(slabcon + " MPa");
+		slabFy1.setText(rebarDia1.getValue() + "이하 : " + slabrebar1 + "MPa");
+		slabFy2.setText(rebarDia2.getValue() + "이상 : " + slabrebar2 + "MPa");
+		
+		//2.
+		slabDeadload.setText(String.format("%.2f", slabdl) + "");
+		slabLiveload.setText(String.format("%.2f", slabll) + "");
+		
+		if (rcSlabWay1.isSelected()) {
+			slabSupport.setText(rcSlabWay1.getText());
+			slabType.setText(way1group.getSelectedToggle() + "");;
+		} else if (rcSlabWay2.isSelected()) {
+			slabSupport.setText(rcSlabWay2.getText());
+		} else {
+			System.out.println("1~2way방식 잘못됨.");
+		}
+		
+		
+		
+		
 
-		nam.first(slabname, slabcon);
-		System.out.println(dia1);
+		//
+		// CalculateSlab nam = new CalculateSlab();
+		//
+		// nam.first(slabname, slabcon);
+		// System.out.println(dia1);
 
 	}
 
 	@FXML
 	void onClickSlabDesign(ActionEvent event) {
-		
 
 		String slabname = rcSlabName.getText();
 		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
 		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
 		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
 		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
-		String slabrebar2 = rebarFy2.getText();
+		int slabrebar2 = Integer.parseInt(RebarFy2.getText());
 		double slabspanx = Integer.parseInt(rcSlabSpanx.getText());
 		double slabspany = Integer.parseInt(rcSlabSpany.getText());
-		String slabthk = rcSlabThk.getText();
-		String slabcover = rcSlabCover.getText();
+		int slabthk = Integer.parseInt(rcSlabThk.getText());
+		double slabcover = Integer.parseInt(rcSlabCover.getText());
 		double slabdl = Integer.parseInt(rcSlabDL.getText());
 		double slabll = Integer.parseInt(rcSlabLL.getText());
 
-		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
-		
+		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 2);
+
 	}
 
 	// 실행화면
@@ -258,7 +288,10 @@ public class MainRcSlabController implements Initializable {
 	private Label slabFck;
 
 	@FXML
-	private Label slabFy;
+	private Label slabFy1;
+
+	@FXML
+	private Label slabFy2;
 
 	@FXML
 	private GridPane slabSheet2;
