@@ -13,7 +13,7 @@ public class MainRcSlab extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainRcSlabfx.fxml"));
-			Scene scene = new Scene(root, 1300, 900);
+			Scene scene = new Scene(root, 1300, 1000);
 			scene.getStylesheets().add(getClass().getResource("rcapplication.css").toExternalForm());
 			primaryStage.setScene(scene);
 			//ADD

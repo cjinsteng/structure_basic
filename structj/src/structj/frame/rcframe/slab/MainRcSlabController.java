@@ -45,6 +45,10 @@ public class MainRcSlabController implements Initializable {
 	ObservableList<String> list2 = FXCollections.observableArrayList("D10", "D13", "D16", "D19", "D22", "D25", "D29",
 			"D32");
 
+
+    @FXML
+    private ComboBox<ImageView> rcSlabWay2box;
+
 	@FXML
 	private TextField RebarFy2;
 
@@ -153,8 +157,8 @@ public class MainRcSlabController implements Initializable {
 		slabSheet2.setGridLinesVisible(true);
 		slabDeadload.setText("4.0");
 		slabLiveload.setText("5.0");
-		slabType.setText("1-Way slab");
-		slabSupport.setText("type-2");
+//		slabType.setText("1-Way slab");
+//		slabSupport.setText("type-2");
 
 		// 3.
 		slabSheet3.setGridLinesVisible(true);
@@ -176,6 +180,7 @@ public class MainRcSlabController implements Initializable {
 	void onRcSlabWay1(ActionEvent event) {
 		rcSlabWay1Table.setVisible(true);
 		rcSlabWay2Table.setVisible(false);
+		way2group.selectToggle(null);
 
 	}
 
@@ -183,6 +188,7 @@ public class MainRcSlabController implements Initializable {
 	void onRcSlabWay2(ActionEvent event) {
 		rcSlabWay2Table.setVisible(true);
 		rcSlabWay1Table.setVisible(false);
+		way1group.selectToggle(null);
 
 	}
 
@@ -206,6 +212,8 @@ public class MainRcSlabController implements Initializable {
 		double slabcover = Double.parseDouble(rcSlabCover.getText());
 		double slabdl = Double.parseDouble(rcSlabDL.getText());
 		double slabll = Double.parseDouble(rcSlabLL.getText());
+		
+
 
 		// 실행화면
 		slabSpanx.setText(String.format("%.2f", slabspanx) + " m");
@@ -217,17 +225,38 @@ public class MainRcSlabController implements Initializable {
 		slabFy2.setText(rebarDia2.getValue() + "이상 : " + slabrebar2 + "MPa");
 		
 		//2.
+		//deadload & Liveload
 		slabDeadload.setText(String.format("%.2f", slabdl) + "");
 		slabLiveload.setText(String.format("%.2f", slabll) + "");
 		
+		//slabway
 		if (rcSlabWay1.isSelected()) {
-			slabSupport.setText(rcSlabWay1.getText());
-			slabType.setText(way1group.getSelectedToggle() + "");;
+			slabType.setText(rcSlabWay1.getText() + " slab");
+			
+			if (rcSlabWay11.isSelected()) {
+				slabSupport.setText("Pin-Pin");
+			} else if (rcSlabWay12.isSelected()) {
+				slabSupport.setText("Pin-Fix");				
+			} else if (rcSlabWay13.isSelected()) {
+				slabSupport.setText("Fix-FIx");				
+			} else if (rcSlabWay14.isSelected()) {
+				slabSupport.setText("Canti");				
+			}
 		} else if (rcSlabWay2.isSelected()) {
-			slabSupport.setText(rcSlabWay2.getText());
+			slabType.setText(rcSlabWay2.getText() + " slab");
+			
+			//슬래브2way선택시 int1~9까지로 change
+//			System.out.println(rcSlabWay2box.getValue().getId());
+			String way2box = rcSlabWay2box.getValue().getId();
+			String way2 = way2box.substring(way2box.length()-1, way2box.length());
+			int way2_int = Integer.parseInt(way2);
+			
+			slabSupport.setText("Case -" + way2_int);
 		} else {
 			System.out.println("1~2way방식 잘못됨.");
 		}
+		
+		
 		
 		
 		
@@ -244,20 +273,21 @@ public class MainRcSlabController implements Initializable {
 	@FXML
 	void onClickSlabDesign(ActionEvent event) {
 
-		String slabname = rcSlabName.getText();
-		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
-		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
-		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
-		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
-		int slabrebar2 = Integer.parseInt(RebarFy2.getText());
-		double slabspanx = Integer.parseInt(rcSlabSpanx.getText());
-		double slabspany = Integer.parseInt(rcSlabSpany.getText());
-		int slabthk = Integer.parseInt(rcSlabThk.getText());
-		double slabcover = Integer.parseInt(rcSlabCover.getText());
-		double slabdl = Integer.parseInt(rcSlabDL.getText());
-		double slabll = Integer.parseInt(rcSlabLL.getText());
+//		String slabname = rcSlabName.getText();
+//		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
+//		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
+//		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
+//		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
+//		int slabrebar2 = Integer.parseInt(RebarFy2.getText());
+//		double slabspanx = Integer.parseInt(rcSlabSpanx.getText());
+//		double slabspany = Integer.parseInt(rcSlabSpany.getText());
+//		int slabthk = Integer.parseInt(rcSlabThk.getText());
+//		double slabcover = Integer.parseInt(rcSlabCover.getText());
+//		double slabdl = Integer.parseInt(rcSlabDL.getText());
+//		double slabll = Integer.parseInt(rcSlabLL.getText());
 
-		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 2);
+//		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 2);
+			
 
 	}
 

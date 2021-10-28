@@ -25,6 +25,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.*?>
 
 <BorderPane prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="structj.frame.rcframe.slab.MainRcSlabController">
    <right>
@@ -130,7 +131,7 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <ComboBox fx:id="rebarDia1" editable="true" prefWidth="180.0" visibleRowCount="8">
+                                                      <ComboBox fx:id="rebarDia1" editable="true" prefWidth="180.0" promptText="D13" visibleRowCount="8">
                                                          <HBox.margin>
                                                             <Insets />
                                                          </HBox.margin>
@@ -145,7 +146,7 @@
                                                 <Separator opacity="0.0" prefHeight="5.0" prefWidth="200.0" />
                                                 <HBox>
                                                    <children>
-                                                      <ComboBox fx:id="rebarDia2" editable="true" prefWidth="180.0" visibleRowCount="8" />
+                                                      <ComboBox fx:id="rebarDia2" editable="true" prefWidth="180.0" promptText="D16" visibleRowCount="8" />
                                                       <TextField fx:id="RebarFy2" text="500">
                                                          <HBox.margin>
                                                             <Insets left="15.0" />
@@ -395,6 +396,61 @@
                               </VBox>
                               <VBox fx:id="rcSlabWay2Table" prefHeight="300.0" prefWidth="200.0">
                                  <children>
+                                    <ComboBox fx:id="rcSlabWay2box" minHeight="100.0" prefHeight="100.0" prefWidth="250.0">
+                                       <VBox.margin>
+                                          <Insets left="30.0" top="30.0" />
+                                       </VBox.margin>
+                                      	<items>
+                                    		<FXCollections fx:factory="observableArrayList">
+										      <ImageView fx:id="slabway2_1" fitHeight="100.0" fitWidth="100.0" layoutX="10" layoutY="10" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_1.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_2" fitHeight="100.0" fitWidth="100.0" layoutX="150" layoutY="10" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_2.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_3" fitHeight="100.0" fitWidth="100.0" layoutX="150" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_3.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_4" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_4.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_5" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_5.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_6" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_6.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_7" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_7.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_8" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_8.PNG" />
+										          </image>
+										      </ImageView>
+										      										      <ImageView fx:id="slabway2_9" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+										          <image>
+                                               		 <Image url="@img/type2_9.PNG" />
+										          </image>
+										      </ImageView>
+										    </FXCollections>
+                                        </items>
+                                     
+                                       </ComboBox>
                                     <HBox prefHeight="50.0" prefWidth="200.0">
                                        <children>
                                           <RadioButton fx:id="rcSlabWay21" mnemonicParsing="false" text="1">
@@ -414,127 +470,6 @@
                                        <VBox.margin>
                                           <Insets bottom="20.0" top="20.0" />
                                        </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay22" mnemonicParsing="false" text="2" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay23" mnemonicParsing="false" text="3" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay24" mnemonicParsing="false" text="4" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay25" mnemonicParsing="false" text="5" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay26" mnemonicParsing="false" text="6" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay27" mnemonicParsing="false" text="7" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay28" mnemonicParsing="false" text="8" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay29" mnemonicParsing="false" text="9" toggleGroup="$way2group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
                                     </HBox>
                                  </children>
                               </VBox>
@@ -785,7 +720,7 @@
                                        <children>
                                           <ImageView fx:id="slabImage1" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true">
                                              <image>
-                                                <Image url="@slabType1.PNG" />
+                                                <Image url="@img/slabType1.PNG" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -797,7 +732,7 @@
                                        <children>
                                           <ImageView fx:id="slabImage2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@slabTypeSec1.PNG" />
+                                                <Image url="@img/slabTypeSec1.PNG" />
                                              </image>
                                           </ImageView>
                                        </children>
