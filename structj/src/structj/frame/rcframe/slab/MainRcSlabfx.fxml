@@ -28,1327 +28,1428 @@
 <?import javafx.collections.*?>
 
 <BorderPane prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="structj.frame.rcframe.slab.MainRcSlabController">
-   <right>
-      <Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" BorderPane.alignment="CENTER" />
-   </right>
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Print" />
-                  <MenuItem mnemonicParsing="false" text="CLose" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Unit system" />
-                  <MenuItem mnemonicParsing="false" text="Print" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <bottom>
-      <HBox prefHeight="30.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label maxHeight="1.7976931348623157E308" prefHeight="30.0" text="Date : " />
-            <Pane HBox.hgrow="ALWAYS" />
-            <Label text="Label" />
-         </children>
-         <padding>
-            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-         </padding>
-      </HBox>
-   </bottom>
-   <left>
-      <ListView maxHeight="1.7976931348623157E308" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </left>
-   <center>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-         <children>
-            <HBox>
-               <children>
-                  <VBox maxHeight="1.7976931348623157E308" minWidth="300.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Separator prefWidth="200.0" />
-                        <HBox prefHeight="20.0">
-                           <children>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="NAME   :" textAlignment="RIGHT">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <padding>
-                                    <Insets left="20.0" right="20.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="rcSlabName" text="S1" />
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </padding>
-                        </HBox>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="Materal">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Con'C   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabCon" text="24" />
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="10.0" />
-                                    <HBox maxHeight="1.7976931348623157E308">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Rebar   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <VBox prefWidth="180.0">
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <ComboBox fx:id="rebarDia1" editable="true" prefWidth="180.0" promptText="D13" visibleRowCount="8">
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </ComboBox>
-                                                      <TextField fx:id="RebarFy1" text="400">
-                                                         <HBox.margin>
-                                                            <Insets left="15.0" />
-                                                         </HBox.margin>
-                                                      </TextField>
-                                                   </children>
-                                                </HBox>
-                                                <Separator opacity="0.0" prefHeight="5.0" prefWidth="200.0" />
-                                                <HBox>
-                                                   <children>
-                                                      <ComboBox fx:id="rebarDia2" editable="true" prefWidth="180.0" promptText="D16" visibleRowCount="8" />
-                                                      <TextField fx:id="RebarFy2" text="500">
-                                                         <HBox.margin>
-                                                            <Insets left="15.0" />
-                                                         </HBox.margin>
-                                                      </TextField>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="Demension">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span x   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabSpanx" text="4">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span y   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabSpany" text="4">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="30.0" />
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="THK      :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabThk" text="150">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Cover   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabCover" text="20">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <VBox prefHeight="150.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="Load">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DeadLoad   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabDL" text="6.5">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
-                                    <HBox prefWidth="200.0">
-                                       <children>
-                                          <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LiveLoad   :" textAlignment="RIGHT">
-                                             <padding>
-                                                <Insets left="10.0" right="20.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <TextField fx:id="rcSlabLL" text="5">
-                                             <font>
-                                                <Font size="13.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
-                           <children>
-                              <RadioButton fx:id="rcSlabWay1" mnemonicParsing="false" onAction="#onRcSlabWay1" text="1-Way">
-                                 <padding>
-                                    <Insets right="30.0" />
-                                 </padding>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="slabgroup" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="rcSlabWay2" mnemonicParsing="false" onAction="#onRcSlabWay2" text="2-Way" toggleGroup="$slabgroup">
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </RadioButton>
-                           </children>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
-                        </HBox>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <VBox fx:id="rcSlabWay1Table" prefHeight="300.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay11" mnemonicParsing="false" text="1">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="way1group" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay12" mnemonicParsing="false" text="2" toggleGroup="$way1group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay13" mnemonicParsing="false" text="3" toggleGroup="$way1group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay14" mnemonicParsing="false" text="4" toggleGroup="$way1group">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox fx:id="rcSlabWay2Table" prefHeight="300.0" prefWidth="200.0">
-                                 <children>
-                                    <ComboBox fx:id="rcSlabWay2box" minHeight="100.0" prefHeight="100.0" prefWidth="250.0">
-                                       <VBox.margin>
-                                          <Insets left="30.0" top="30.0" />
-                                       </VBox.margin>
-                                      	<items>
-                                    		<FXCollections fx:factory="observableArrayList">
-										      <ImageView fx:id="slabway2_1" fitHeight="100.0" fitWidth="100.0" layoutX="10" layoutY="10" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_1.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_2" fitHeight="100.0" fitWidth="100.0" layoutX="150" layoutY="10" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_2.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_3" fitHeight="100.0" fitWidth="100.0" layoutX="150" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_3.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_4" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_4.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_5" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_5.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_6" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_6.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_7" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_7.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_8" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_8.PNG" />
-										          </image>
-										      </ImageView>
-										      										      <ImageView fx:id="slabway2_9" fitHeight="100.0" fitWidth="100.0" layoutX="260.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-										          <image>
-                                               		 <Image url="@img/type2_9.PNG" />
-										          </image>
-										      </ImageView>
-										    </FXCollections>
-                                        </items>
-                                     
-                                       </ComboBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="rcSlabWay21" mnemonicParsing="false" text="1">
-                                             <HBox.margin>
-                                                <Insets left="40.0" top="10.0" />
-                                             </HBox.margin>
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="way2group" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="rcSlabDesign" mnemonicParsing="false" onAction="#onClickSlabDesign" text="Design(F4)" />
-                              <Button fx:id="rcSlabCheck" mnemonicParsing="false" onAction="#onClickSlabCheck" text="Check(F5)">
-                                 <HBox.margin>
-                                    <Insets left="30.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <ScrollPane fx:id="rcSlabScroll" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="800.0">
-                     <content>
-                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                           <children>
-                              <VBox maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label text="1. General Information">
-                                       <VBox.margin>
-                                          <Insets left="5.0" top="5.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <GridPane fx:id="slabSheet1" maxWidth="-Infinity" prefWidth="700.0">
-                                      <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Design Code" textAlignment="CENTER">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Unit System" textAlignment="CENTER" GridPane.columnIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span(x)" textAlignment="CENTER" GridPane.columnIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span(y)" textAlignment="CENTER" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="THK." textAlignment="CENTER" GridPane.columnIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fck" textAlignment="CENTER" GridPane.columnIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fy" textAlignment="CENTER" GridPane.columnIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabDesignCode" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabUnitSystem" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabSpanx" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabSpany" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabThk" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabFck" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabFy1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabFy2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </VBox.margin>
-                                    </GridPane>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="2. Design Load &amp; Support Condition">
-                                       <VBox.margin>
-                                          <Insets left="5.0" top="5.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <GridPane fx:id="slabSheet2" maxWidth="-Infinity" prefWidth="700.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dead Load" textAlignment="CENTER">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Live Load" textAlignment="CENTER" GridPane.columnIndex="1">
-                                             <font>
-                                                <Font name="HY울릉도M" size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Slab Type" textAlignment="CENTER" GridPane.columnIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Support Type" textAlignment="CENTER" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabType" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabSupport" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER" GridPane.rowIndex="1">
-                                             <children>
-                                                <Label fx:id="slabDeadload" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font size="11.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" kN/m" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font size="11.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="TOP_LEFT" text="2">
-                                                   <font>
-                                                      <Font size="6.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                             <children>
-                                                <Label fx:id="slabLiveload" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font size="11.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" kN/m" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font size="11.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label alignment="TOP_LEFT" text="2">
-                                                   <font>
-                                                      <Font size="6.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                   <HBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </VBox.margin>
-                                    </GridPane>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <HBox prefHeight="300.0" prefWidth="200.0">
-                                 <children>
-                                    <TilePane alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
-                                       <children>
-                                          <ImageView fx:id="slabImage1" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true">
-                                             <image>
-                                                <Image url="@img/slabType1.PNG" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="70.0" right="50.0" />
-                                       </HBox.margin>
-                                    </TilePane>
-                                    <TilePane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fx:id="slabImage2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@img/slabTypeSec1.PNG" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="30.0" right="50.0" />
-                                       </HBox.margin>
-                                    </TilePane>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <VBox prefWidth="800.0">
-                                 <children>
-                                    <Label text="3. Check Thickness">
-                                       <VBox.margin>
-                                          <Insets left="5.0" top="5.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <GridPane fx:id="slabSheet3" maxWidth="-Infinity" prefWidth="700.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="231.0" text="Check Item" textAlignment="CENTER">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Input" textAlignment="CENTER" GridPane.columnIndex="1">
-                                             <font>
-                                                <Font name="HY울릉도M" size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Criteria" textAlignment="CENTER" GridPane.columnIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ratio" textAlignment="CENTER" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Required minimum thickness(mm)" textAlignment="CENTER" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabThickness1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabThickness2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabThickness3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </VBox.margin>
-                                    </GridPane>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <Label text="4. ReinForcement">
-                                       <VBox.margin>
-                                          <Insets left="5.0" top="5.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <GridPane fx:id="slabSheet31" maxWidth="750.0" minWidth="700.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="231.0" text="TYPE" textAlignment="CENTER" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Location" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowSpan="2">
-                                             <font>
-                                                <Font name="HY울릉도M" size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mu" textAlignment="CENTER" GridPane.columnIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ratio" textAlignment="CENTER" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ast" textAlignment="CENTER" GridPane.columnIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Spacing" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.columnSpan="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Short" textAlignment="CENTER" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span" textAlignment="CENTER" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span" textAlignment="CENTER" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Short" textAlignment="CENTER" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="중앙부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="불연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="중앙부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="불연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="최소철근비" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(kN*m/m)" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(%)" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(mm2/m)" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10+D13" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13+D16" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMidMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMidRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMidAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMid1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMid2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMid3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortMid4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortConMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortConRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortConAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortCon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortCon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortCon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortCon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDisconMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDisconRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDisconAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDiscon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDiscon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDiscon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabShortDiscon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMidMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMidRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMidAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMid1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMid2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMid3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongMid4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongConMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongConRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongConAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongCon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongCon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongCon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongCon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="6">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDisconMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDisconRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDisconAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDiscon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDiscon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDiscon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabLongDiscon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="7">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebarRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebarAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebar1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebar2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebar3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="slabMinRebar4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font size="11.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </VBox.margin>
-                                    </GridPane>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="5.  Check Shear Strength">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="10.0" prefWidth="400.0">
-                                       <children>
-                                          <Label text="Strength result Factor = ">
-                                             <font>
-                                                <Font size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="30.0" top="10.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <Label text="Short Direction Shear">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="20.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-                                       <children>
-                                          <Label text="Vux = " />
-                                          <Label fx:id="rcSlabVu1" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabShear1" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="Vc = ">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabVc1" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text=".......">
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabShearResult1" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="40.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <Label text="Long Direction Shear">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="20.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-                                       <children>
-                                          <Label text="Vux = " />
-                                          <Label fx:id="rcSlabVu2" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabShear2" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text="Vc = ">
-                                             <HBox.margin>
-                                                <Insets left="30.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabVc2" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label text=".......">
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="rcSlabShearResult2" text="Label">
-                                             <HBox.margin>
-                                                <Insets left="5.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="40.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="15.0" />
-                                 </VBox.margin>
-                              </VBox>
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-   </center>
+	<right>
+		<Separator opacity="0.0" orientation="VERTICAL" prefWidth="20.0" BorderPane.alignment="CENTER" />
+	</right>
+	<top>
+		<MenuBar BorderPane.alignment="CENTER">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Print" />
+						<MenuItem mnemonicParsing="false" text="CLose" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Edit">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Unit system" />
+						<MenuItem mnemonicParsing="false" text="Print" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Help">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+	</top>
+	<bottom>
+		<HBox prefHeight="30.0" spacing="5.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label maxHeight="1.7976931348623157E308" prefHeight="30.0" text="Date : " />
+				<Pane HBox.hgrow="ALWAYS" />
+				<Label text="Label" />
+			</children>
+			<padding>
+				<Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+			</padding>
+		</HBox>
+	</bottom>
+	<left>
+		<ListView maxHeight="1.7976931348623157E308" prefWidth="200.0" BorderPane.alignment="CENTER" />
+	</left>
+	<center>
+		<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+			<children>
+				<HBox>
+					<children>
+						<VBox maxHeight="1.7976931348623157E308" minWidth="300.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+							<children>
+								<Separator prefWidth="200.0" />
+								<HBox prefHeight="20.0">
+									<children>
+										<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="NAME   :" textAlignment="RIGHT">
+											<HBox.margin>
+												<Insets />
+											</HBox.margin>
+											<padding>
+												<Insets left="20.0" right="20.0" />
+											</padding>
+										</Label>
+										<TextField fx:id="rcSlabName" text="S1" />
+									</children>
+									<padding>
+										<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+									</padding>
+								</HBox>
+								<StackPane prefHeight="150.0" prefWidth="200.0">
+									<children>
+										<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+										<VBox prefHeight="200.0" prefWidth="100.0">
+											<children>
+												<Label text="Materal">
+													<VBox.margin>
+														<Insets bottom="10.0" left="15.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Con'C   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabCon" text="24" />
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="10.0" />
+												<HBox maxHeight="1.7976931348623157E308">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Rebar   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<VBox prefWidth="180.0">
+															<children>
+																<HBox>
+																	<children>
+																		<ComboBox fx:id="rebarDia1" editable="true" prefWidth="180.0" promptText="D13" visibleRowCount="8">
+																			<HBox.margin>
+																				<Insets />
+																			</HBox.margin>
+																		</ComboBox>
+																		<TextField fx:id="RebarFy1" text="400">
+																			<HBox.margin>
+																				<Insets left="15.0" />
+																			</HBox.margin>
+																		</TextField>
+																	</children>
+																</HBox>
+																<Separator opacity="0.0" prefHeight="5.0" prefWidth="200.0" />
+																<HBox>
+																	<children>
+																		<ComboBox fx:id="rebarDia2" editable="true" prefWidth="180.0" promptText="D16" visibleRowCount="8" />
+																		<TextField fx:id="RebarFy2" text="500">
+																			<HBox.margin>
+																				<Insets left="15.0" />
+																			</HBox.margin>
+																		</TextField>
+																	</children>
+																</HBox>
+															</children>
+														</VBox>
+													</children>
+												</HBox>
+											</children>
+										</VBox>
+									</children>
+								</StackPane>
+								<StackPane prefHeight="150.0" prefWidth="200.0">
+									<children>
+										<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+										<VBox prefHeight="200.0" prefWidth="100.0">
+											<children>
+												<Label text="Demension">
+													<VBox.margin>
+														<Insets bottom="10.0" left="15.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span x   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabSpanx" text="4">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span y   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabSpany" text="4">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="30.0" />
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="THK      :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabThk" text="150">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Cover   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabCover" text="20">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+											</children>
+										</VBox>
+									</children>
+								</StackPane>
+								<StackPane prefHeight="150.0" prefWidth="200.0">
+									<children>
+										<ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+										<VBox prefHeight="150.0" prefWidth="100.0">
+											<children>
+												<Label text="Load">
+													<VBox.margin>
+														<Insets bottom="10.0" left="15.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DeadLoad   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabDL" text="6.5">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LiveLoad   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<TextField fx:id="rcSlabLL" text="5">
+															<font>
+																<Font size="13.0" />
+															</font>
+														</TextField>
+													</children>
+												</HBox>
+												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+											</children>
+										</VBox>
+									</children>
+								</StackPane>
+								<HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
+									<children>
+										<RadioButton fx:id="rcSlabWay1" mnemonicParsing="false" onAction="#onRcSlabWay1" text="1-Way">
+											<padding>
+												<Insets right="30.0" />
+											</padding>
+											<toggleGroup>
+												<ToggleGroup fx:id="slabgroup" />
+											</toggleGroup>
+										</RadioButton>
+										<RadioButton fx:id="rcSlabWay2" mnemonicParsing="false" onAction="#onRcSlabWay2" text="2-Way" toggleGroup="$slabgroup">
+											<padding>
+												<Insets left="30.0" />
+											</padding>
+										</RadioButton>
+									</children>
+									<padding>
+										<Insets top="10.0" />
+									</padding>
+								</HBox>
+								<StackPane prefHeight="150.0" prefWidth="200.0">
+									<children>
+										<VBox fx:id="rcSlabWay1Table" prefHeight="300.0" prefWidth="200.0">
+											<children>
+												<HBox prefHeight="50.0" prefWidth="200.0">
+													<children>
+														<RadioButton fx:id="rcSlabWay11" mnemonicParsing="false" text="1">
+															<HBox.margin>
+																<Insets left="40.0" top="10.0" />
+															</HBox.margin>
+															<toggleGroup>
+																<ToggleGroup fx:id="way1group" />
+															</toggleGroup>
+														</RadioButton>
+														<ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</ImageView>
+													</children>
+													<VBox.margin>
+														<Insets bottom="20.0" top="20.0" />
+													</VBox.margin>
+												</HBox>
+												<HBox prefHeight="50.0" prefWidth="200.0">
+													<children>
+														<RadioButton fx:id="rcSlabWay12" mnemonicParsing="false" text="2" toggleGroup="$way1group">
+															<HBox.margin>
+																<Insets left="40.0" top="10.0" />
+															</HBox.margin>
+														</RadioButton>
+														<ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</ImageView>
+													</children>
+													<VBox.margin>
+														<Insets bottom="20.0" />
+													</VBox.margin>
+												</HBox>
+												<HBox prefHeight="50.0" prefWidth="200.0">
+													<children>
+														<RadioButton fx:id="rcSlabWay13" mnemonicParsing="false" text="3" toggleGroup="$way1group">
+															<HBox.margin>
+																<Insets left="40.0" top="10.0" />
+															</HBox.margin>
+														</RadioButton>
+														<ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</ImageView>
+													</children>
+													<VBox.margin>
+														<Insets bottom="20.0" />
+													</VBox.margin>
+												</HBox>
+												<HBox prefHeight="50.0" prefWidth="200.0">
+													<children>
+														<RadioButton fx:id="rcSlabWay14" mnemonicParsing="false" text="4" toggleGroup="$way1group">
+															<HBox.margin>
+																<Insets left="40.0" top="10.0" />
+															</HBox.margin>
+														</RadioButton>
+														<ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</ImageView>
+													</children>
+													<VBox.margin>
+														<Insets bottom="20.0" />
+													</VBox.margin>
+												</HBox>
+											</children>
+										</VBox>
+										<VBox fx:id="rcSlabWay2Table" prefHeight="300.0" prefWidth="200.0">
+											<children>
+												<ComboBox fx:id="rcSlabWay2box" minHeight="100.0" prefHeight="100.0" prefWidth="250.0">
+													<VBox.margin>
+														<Insets left="30.0" top="30.0" />
+													</VBox.margin>
+													<items>
+														<FXCollections fx:factory="observableArrayList">
+															<!-- <Label text = 'TYPE-1' > <graphic> -->
+															<ImageView fx:id="slabway2_1" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_1.PNG" />
+																</image>
+															</ImageView>
+															<!-- </graphic> </Label> -->
+															<ImageView fx:id="slabway2_2" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_2.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_3" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_3.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_4" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_4.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_5" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_5.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_6" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_6.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_7" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_7.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_8" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_8.PNG" />
+																</image>
+															</ImageView>
+															<ImageView fx:id="slabway2_9" fitHeight="90" fitWidth="100.0" pickOnBounds="true" preserveRatio="false">
+																<image>
+																	<Image url="@img/type2_9.PNG" />
+																</image>
+															</ImageView>
+														</FXCollections>
+													</items>
+												</ComboBox>
+												<VBox prefHeight="200.0" prefWidth="100.0">
+													<children>
+														<Label text="Boundary Beams">
+															<VBox.margin>
+																<Insets bottom="10.0" left="15.0" top="5.0" />
+															</VBox.margin>
+														</Label>
+														<HBox prefWidth="200.0">
+															<children>
+																<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="B1  :" textAlignment="RIGHT">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</Label>
+																<TextField fx:id="rcSlabB1b" prefWidth="100.0" text="400">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" text=" X " textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB1h" prefWidth="100.0" text="600">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+															</children>
+															<VBox.margin>
+																<Insets left="30.0" right="43.0" top="5.0" />
+															</VBox.margin>
+														</HBox>
+														<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+														<HBox prefWidth="200.0">
+															<children>
+																<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="B2  :" textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB2b" prefWidth="100.0" text="400">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" text=" X " textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB2h" prefWidth="100.0" text="600">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Button fx:id="slabup2" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="up">
+																	<font>
+																		<Font size="10.0" />
+																	</font>
+																	<HBox.margin>
+																		<Insets left="5.0" />
+																	</HBox.margin>
+																</Button>
+															</children>
+															<VBox.margin>
+																<Insets left="30.0" right="10.0" top="5.0" />
+															</VBox.margin>
+														</HBox>
+														<Separator opacity="0.0" prefHeight="30.0" />
+														<HBox prefWidth="200.0">
+															<children>
+																<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="B3  :" textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB3b" prefWidth="100.0" text="400">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" text=" X " textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB3h" prefWidth="100.0" text="600">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Button fx:id="slabup3" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="up">
+																	<font>
+																		<Font size="10.0" />
+																	</font>
+																	<HBox.margin>
+																		<Insets left="5.0" />
+																	</HBox.margin>
+																</Button>
+															</children>
+															<VBox.margin>
+																<Insets left="30.0" right="10.0" top="5.0" />
+															</VBox.margin>
+														</HBox>
+														<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+														<HBox prefWidth="200.0">
+															<children>
+																<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="70.0" text="B4  :" textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB4b" prefWidth="100.0" text="400">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" text=" X " textAlignment="RIGHT" />
+																<TextField fx:id="rcSlabB4h" prefWidth="100.0" text="600">
+																	<font>
+																		<Font size="13.0" />
+																	</font>
+																</TextField>
+																<Button fx:id="slabup4" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="50.0" text="up">
+																	<font>
+																		<Font size="10.0" />
+																	</font>
+																	<HBox.margin>
+																		<Insets left="5.0" />
+																	</HBox.margin>
+																</Button>
+															</children>
+															<VBox.margin>
+																<Insets left="30.0" right="10.0" top="5.0" />
+															</VBox.margin>
+														</HBox>
+													</children>
+												</VBox>
+
+											</children>
+										</VBox>
+									</children>
+								</StackPane>
+								<HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+									<children>
+										<Button fx:id="rcSlabDesign" mnemonicParsing="false" onAction="#onClickSlabDesign" text="Design(F4)" />
+										<Button fx:id="rcSlabCheck" mnemonicParsing="false" onAction="#onClickSlabCheck" text="Check(F5)">
+											<HBox.margin>
+												<Insets left="30.0" />
+											</HBox.margin>
+										</Button>
+									</children>
+									<VBox.margin>
+										<Insets top="30.0" />
+									</VBox.margin>
+								</HBox>
+							</children>
+						</VBox>
+						<ScrollPane fx:id="rcSlabScroll" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="800.0">
+							<content>
+								<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+									<children>
+										<VBox maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+											<children>
+												<Label text="1. General Information">
+													<VBox.margin>
+														<Insets left="5.0" top="5.0" />
+													</VBox.margin>
+													<font>
+														<Font size="13.0" />
+													</font>
+												</Label>
+												<GridPane fx:id="slabSheet1" maxWidth="-Infinity" prefWidth="700.0">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Design Code" textAlignment="CENTER">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Unit System" textAlignment="CENTER" GridPane.columnIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span(x)" textAlignment="CENTER" GridPane.columnIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span(y)" textAlignment="CENTER" GridPane.columnIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="THK." textAlignment="CENTER" GridPane.columnIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fck" textAlignment="CENTER" GridPane.columnIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fy" textAlignment="CENTER" GridPane.columnIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabDesignCode" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabUnitSystem" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabSpanx" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabSpany" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabThk" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabFck" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabFy1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabFy2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="10.0" top="5.0" />
+													</VBox.margin>
+												</GridPane>
+											</children>
+											<VBox.margin>
+												<Insets left="20.0" top="10.0" />
+											</VBox.margin>
+										</VBox>
+										<VBox maxWidth="1.7976931348623157E308">
+											<children>
+												<Label text="2. Design Load &amp; Support Condition">
+													<VBox.margin>
+														<Insets left="5.0" top="5.0" />
+													</VBox.margin>
+													<font>
+														<Font size="13.0" />
+													</font>
+												</Label>
+												<GridPane fx:id="slabSheet2" maxWidth="-Infinity" prefWidth="700.0">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Dead Load" textAlignment="CENTER">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Live Load" textAlignment="CENTER" GridPane.columnIndex="1">
+															<font>
+																<Font name="HY울릉도M" size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Slab Type" textAlignment="CENTER" GridPane.columnIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Support Type" textAlignment="CENTER" GridPane.columnIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabType" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabSupport" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<HBox alignment="CENTER" GridPane.rowIndex="1">
+															<children>
+																<Label fx:id="slabDeadload" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER">
+																	<font>
+																		<Font size="11.0" />
+																	</font>
+																</Label>
+																<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" kN/m" textAlignment="CENTER">
+																	<font>
+																		<Font size="11.0" />
+																	</font>
+																</Label>
+																<Label alignment="TOP_LEFT" text="2">
+																	<font>
+																		<Font size="6.0" />
+																	</font>
+																	<opaqueInsets>
+																		<Insets />
+																	</opaqueInsets>
+																	<HBox.margin>
+																		<Insets bottom="5.0" />
+																	</HBox.margin>
+																</Label>
+															</children>
+														</HBox>
+														<HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+															<children>
+																<Label fx:id="slabLiveload" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER">
+																	<font>
+																		<Font size="11.0" />
+																	</font>
+																</Label>
+																<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" kN/m" textAlignment="CENTER">
+																	<font>
+																		<Font size="11.0" />
+																	</font>
+																</Label>
+																<Label alignment="TOP_LEFT" text="2">
+																	<font>
+																		<Font size="6.0" />
+																	</font>
+																	<opaqueInsets>
+																		<Insets />
+																	</opaqueInsets>
+																	<HBox.margin>
+																		<Insets bottom="5.0" />
+																	</HBox.margin>
+																</Label>
+															</children>
+														</HBox>
+													</children>
+													<VBox.margin>
+														<Insets left="10.0" top="5.0" />
+													</VBox.margin>
+												</GridPane>
+											</children>
+											<VBox.margin>
+												<Insets left="20.0" top="10.0" />
+											</VBox.margin>
+										</VBox>
+										<HBox prefHeight="300.0" prefWidth="200.0">
+											<children>
+												<TilePane alignment="CENTER" prefHeight="300.0" prefWidth="300.0">
+													<children>
+														<ImageView fx:id="slabImage1" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true">
+															<image>
+																<Image url="@img/slabType1.PNG" />
+															</image>
+														</ImageView>
+													</children>
+													<HBox.margin>
+														<Insets left="70.0" right="50.0" />
+													</HBox.margin>
+												</TilePane>
+												<TilePane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+													<children>
+														<ImageView fx:id="slabImage2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+															<image>
+																<Image url="@img/slabTypeSec1.PNG" />
+															</image>
+														</ImageView>
+													</children>
+													<HBox.margin>
+														<Insets left="30.0" right="50.0" />
+													</HBox.margin>
+												</TilePane>
+											</children>
+											<VBox.margin>
+												<Insets top="20.0" />
+											</VBox.margin>
+										</HBox>
+										<VBox prefWidth="800.0">
+											<children>
+												<Label text="3. Check Thickness">
+													<VBox.margin>
+														<Insets left="5.0" top="5.0" />
+													</VBox.margin>
+													<font>
+														<Font size="13.0" />
+													</font>
+												</Label>
+												<GridPane fx:id="slabSheet3" maxWidth="-Infinity" prefWidth="700.0">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="231.0" text="Check Item" textAlignment="CENTER">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Input" textAlignment="CENTER" GridPane.columnIndex="1">
+															<font>
+																<Font name="HY울릉도M" size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Criteria" textAlignment="CENTER" GridPane.columnIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ratio" textAlignment="CENTER" GridPane.columnIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Required minimum thickness(mm)" textAlignment="CENTER" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabThickness1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabThickness2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabThickness3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="10.0" top="5.0" />
+													</VBox.margin>
+												</GridPane>
+											</children>
+											<VBox.margin>
+												<Insets left="20.0" top="10.0" />
+											</VBox.margin>
+										</VBox>
+										<VBox maxWidth="1.7976931348623157E308">
+											<children>
+												<Label text="4. ReinForcement">
+													<VBox.margin>
+														<Insets left="5.0" top="5.0" />
+													</VBox.margin>
+													<font>
+														<Font size="13.0" />
+													</font>
+												</Label>
+												<GridPane fx:id="slabSheet31" maxWidth="750.0" minWidth="700.0">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+														<ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="85.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="231.0" text="TYPE" textAlignment="CENTER" GridPane.rowSpan="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Location" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowSpan="2">
+															<font>
+																<Font name="HY울릉도M" size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mu" textAlignment="CENTER" GridPane.columnIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ratio" textAlignment="CENTER" GridPane.columnIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ast" textAlignment="CENTER" GridPane.columnIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Spacing" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.columnSpan="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Short" textAlignment="CENTER" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span" textAlignment="CENTER" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Span" textAlignment="CENTER" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Short" textAlignment="CENTER" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="중앙부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="불연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="중앙부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="불연속단부" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="최소철근비" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(kN*m/m)" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(%)" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(mm2/m)" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10+D13" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13+D16" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMidMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMidRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMidAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMid1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMid2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMid3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortMid4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="2">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortConMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortConRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortConAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortCon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortCon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortCon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortCon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="3">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDisconMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDisconRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDisconAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDiscon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDiscon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDiscon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabShortDiscon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="4">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMidMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMidRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMidAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMid1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMid2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMid3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongMid4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="5">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongConMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongConRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongConAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongCon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongCon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongCon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongCon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="6">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDisconMu" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDisconRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDisconAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDiscon1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDiscon2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDiscon3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabLongDiscon4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="7">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebarRatio" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebarAst" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebar1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebar2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebar3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+														<Label fx:id="slabMinRebar4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="8">
+															<font>
+																<Font size="11.0" />
+															</font>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="10.0" top="5.0" />
+													</VBox.margin>
+												</GridPane>
+											</children>
+											<VBox.margin>
+												<Insets left="20.0" top="10.0" />
+											</VBox.margin>
+										</VBox>
+										<VBox prefHeight="200.0" prefWidth="100.0">
+											<children>
+												<Label text="5.  Check Shear Strength">
+													<font>
+														<Font size="13.0" />
+													</font>
+												</Label>
+												<HBox prefHeight="10.0" prefWidth="400.0">
+													<children>
+														<Label text="Strength result Factor = ">
+															<font>
+																<Font size="12.0" />
+															</font>
+														</Label>
+														<Label text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="30.0" top="10.0" />
+													</VBox.margin>
+												</HBox>
+												<Label text="Short Direction Shear">
+													<font>
+														<Font size="13.0" />
+													</font>
+													<VBox.margin>
+														<Insets left="20.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+													<children>
+														<Label text="Vux = " />
+														<Label fx:id="rcSlabVu1" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabShear1" text="Label">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</Label>
+														<Label text="Vc = ">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabVc1" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+														<Label text=".......">
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabShearResult1" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="40.0" />
+													</VBox.margin>
+												</HBox>
+												<Label text="Long Direction Shear">
+													<font>
+														<Font size="13.0" />
+													</font>
+													<VBox.margin>
+														<Insets left="20.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+													<children>
+														<Label text="Vux = " />
+														<Label fx:id="rcSlabVu2" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabShear2" text="Label">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</Label>
+														<Label text="Vc = ">
+															<HBox.margin>
+																<Insets left="30.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabVc2" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+														<Label text=".......">
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<Label fx:id="rcSlabShearResult2" text="Label">
+															<HBox.margin>
+																<Insets left="5.0" />
+															</HBox.margin>
+														</Label>
+													</children>
+													<VBox.margin>
+														<Insets left="40.0" />
+													</VBox.margin>
+												</HBox>
+											</children>
+											<VBox.margin>
+												<Insets left="20.0" top="15.0" />
+											</VBox.margin>
+										</VBox>
+									</children>
+								</VBox>
+							</content>
+						</ScrollPane>
+					</children>
+				</HBox>
+			</children>
+		</HBox>
+	</center>
 </BorderPane>
