@@ -1,12 +1,13 @@
 package structj.frame.rcframe.slab;
 
 import java.io.FileInputStream;
-import java.util.Arrays;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.sun.corba.se.impl.dynamicany.DynAnyBasicImpl;
 
 public class Coefficients {
 	// 엑셀에 있는 모멘트 계수 불러오기
@@ -131,9 +132,9 @@ public class Coefficients {
 	public static void moment(Double xlength, Double ylength, Double deadload, Double liveload, int slabcase,
 			int slabtype) {
 
-		System.out.println(momentcoefficients(0, 1, 1));
+		// System.out.println(momentcoefficients(0, 1, 1));
 
-		double lenRatio = ylength / xlength;
+		double lenRatio = xlength / ylength;
 		int a = 3; // 시트갯수 3개(0,1,2) 3시트는 전단
 		double[] dbs = new double[3];
 		double[] dbslong = new double[3];
@@ -142,6 +143,13 @@ public class Coefficients {
 		double x2;
 		double y1;
 		double y2;
+		// System.out.println("lenratio = " + lenRatio);
+		// System.out.println(dbs[0]);
+		// System.out.println(dbs[1]);
+		// System.out.println(dbs[2]);
+		// System.out.println(dbslong[0]);
+		// System.out.println(dbslong[1]);
+		// System.out.println(dbslong[2]);
 
 		if (slabcase == 1) {
 			// 1-way슬래브 모멘트 출력
@@ -162,9 +170,18 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = Math.round(momentShort * 1000) / 1000.0;
+						dbslong[i] = Math.round(momentLong * 1000) / 1000.0;
+						// System.out.println("lenratio = " + lenRatio);
+						// System.out.println("x1 = " + x1);
+						// System.out.println("x1 = " + x2);
+						// System.out.println("x1 = " + y1);
+						// System.out.println("x1 = " + y2);
+						// System.out.println("momentsh = " + momentShort);
+						// System.out.println("momentsh = " + momentLong);
+						// System.out.println("0 = " + dbs[0]);
+						// System.out.println("1 = " +dbs[1]);
+						// System.out.println(dbs[2]);
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -173,9 +190,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -183,9 +200,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -193,9 +210,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -203,9 +220,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -213,9 +230,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -223,9 +240,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -233,8 +250,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -242,9 +259,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -252,9 +269,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -271,9 +288,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -282,9 +298,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -292,9 +308,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -302,9 +318,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -312,9 +328,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -322,9 +338,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -332,9 +348,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -342,8 +358,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -351,9 +367,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -361,9 +377,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -380,9 +396,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -391,9 +406,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -401,9 +416,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -411,9 +426,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -421,9 +436,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -431,9 +446,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -441,9 +456,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -451,8 +466,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -460,9 +475,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -470,9 +485,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -490,9 +505,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -501,9 +515,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -511,9 +525,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -521,9 +535,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -531,9 +545,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -541,9 +555,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -551,9 +565,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -561,8 +575,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -570,9 +584,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -580,9 +594,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -600,9 +614,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -611,9 +624,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -621,9 +634,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -631,9 +644,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -641,9 +654,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -651,9 +664,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -661,9 +674,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -671,8 +684,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -680,9 +693,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -690,9 +703,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -710,9 +723,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -721,9 +733,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -731,9 +743,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -741,9 +753,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -751,9 +763,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -761,9 +773,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -771,9 +783,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -781,8 +793,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -790,9 +802,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -800,9 +812,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -820,9 +832,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -831,9 +842,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -841,9 +852,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -851,9 +862,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -861,9 +872,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -871,9 +882,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -881,9 +892,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -891,8 +902,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -900,9 +911,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -910,9 +921,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -929,9 +940,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -940,9 +950,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -950,9 +960,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -960,9 +970,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -970,9 +980,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -980,9 +990,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -990,9 +1000,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -1000,8 +1010,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -1009,9 +1019,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -1019,9 +1029,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -1038,9 +1048,8 @@ public class Coefficients {
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (1.0 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (1.0 * (y2 - y1) / gap));
 
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 
 					} else if (lenRatio >= 0.9) {
 						x1 = momentcoefficients(i, slabtype, 3);
@@ -1049,9 +1058,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 6);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.95 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.95 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.85) {
 						x1 = momentcoefficients(i, slabtype, 5);
 						x2 = momentcoefficients(i, slabtype, 7);
@@ -1059,9 +1068,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 8);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.9 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.9 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.8) {
 						x1 = momentcoefficients(i, slabtype, 7);
 						x2 = momentcoefficients(i, slabtype, 9);
@@ -1069,9 +1078,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 10);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.85 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.85 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.75) {
 						x1 = momentcoefficients(i, slabtype, 9);
 						x2 = momentcoefficients(i, slabtype, 11);
@@ -1079,9 +1088,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 12);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.8 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.8 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.7) {
 						x1 = momentcoefficients(i, slabtype, 11);
 						x2 = momentcoefficients(i, slabtype, 13);
@@ -1089,9 +1098,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 14);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.75 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.75 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.65) {
 						x1 = momentcoefficients(i, slabtype, 13);
 						x2 = momentcoefficients(i, slabtype, 15);
@@ -1099,9 +1108,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 16);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.7 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.7 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.6) {
 						x1 = momentcoefficients(i, slabtype, 15);
 						x2 = momentcoefficients(i, slabtype, 17);
@@ -1109,8 +1118,8 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 18);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.65 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.65 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
 					} else if (lenRatio >= 0.55) {
 						x1 = momentcoefficients(i, slabtype, 17);
 						x2 = momentcoefficients(i, slabtype, 19);
@@ -1118,9 +1127,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 20);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.6 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.6 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else if (lenRatio >= 0.5) {
 						x1 = momentcoefficients(i, slabtype, 19);
 						x2 = momentcoefficients(i, slabtype, 21);
@@ -1128,9 +1137,9 @@ public class Coefficients {
 						y2 = momentcoefficients(i, slabtype, 22);
 						double momentShort = ((x1 - x2) / gap) * lenRatio + (x1 + (0.55 * (x2 - x1) / gap));
 						double momentLong = ((y1 - y2) / gap) * lenRatio + (y1 + (0.55 * (y2 - y1) / gap));
-						dbs[i] = (double)Math.round(momentShort*1000)/1000;
-						dbslong[i] = (double)Math.round(momentLong*1000)/1000;
-						
+						dbs[i] = (double) Math.round(momentShort * 1000) / 1000;
+						dbslong[i] = (double) Math.round(momentLong * 1000) / 1000;
+
 					} else {
 						System.out.println("길이잘못입력함.");
 					}
@@ -1144,6 +1153,29 @@ public class Coefficients {
 		} else {
 			System.out.println("slabcase error");
 		}
+
+		double factorDL1 = deadload * 1.2;
+		double factorDL2 = deadload * 1.4;
+		double factorLL1 = liveload * 1.6;
+		double factorDL = 0;
+		double factorLL = 0;
+		double factorMax = Math.max(factorDL1 + factorLL1, factorDL2);
+		
+		if (factorDL1 + factorLL1 >= factorDL2) {
+			factorDL = factorDL1;
+			factorLL = factorLL1;
+		} else {
+			factorDL = factorDL2;
+			factorLL = 0;
+		}
+
+		double negMa = dbs[0] * factorMax * Math.pow(xlength, 2);
+		double negMb = dbslong[0] * factorMax * Math.pow(ylength, 2);
+		double posMDLa = dbs[1] * factorDL * Math.pow(xlength, 2);
+		double posMDLb = dbslong[1] * factorDL * Math.pow(ylength, 2);
+		double posMLLa = dbs[2] * factorLL * Math.pow(xlength, 2);
+		double posMLLb = dbslong[2] * factorLL * Math.pow(ylength, 2);
+		MainRcSlabController.momentcal(negMa, negMb, posMDLa, posMDLb, posMLLa, posMLLb);
 
 	}
 }
