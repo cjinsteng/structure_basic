@@ -7,9 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.sun.corba.se.impl.dynamicany.DynAnyBasicImpl;
-
-public class Coefficients {
+public class Coefficients extends MainRcSlabController {
 	// 엑셀에 있는 모멘트 계수 불러오기
 	public static void momentcoefficientsAll(int a) { // a : 시트번호
 
@@ -1175,7 +1173,14 @@ public class Coefficients {
 		double posMDLb = dbslong[1] * factorDL * Math.pow(ylength, 2);
 		double posMLLa = dbs[2] * factorLL * Math.pow(xlength, 2);
 		double posMLLb = dbslong[2] * factorLL * Math.pow(ylength, 2);
-		MainRcSlabController.momentcal(negMa, negMb, posMDLa, posMDLb, posMLLa, posMLLb);
-
+		
+		System.out.println(negMa);
+		System.out.println(negMb);
+		System.out.println(posMDLa);
+		System.out.println(posMLLa);
+		System.out.println(posMDLb);
+		
+		MainRcSlabController mo = new MainRcSlabController();
+		mo.m1(negMa,negMb,posMDLa,posMLLa,posMDLb,posMLLb);
 	}
 }

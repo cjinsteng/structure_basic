@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 public class MainRcSlabController implements Initializable {
@@ -268,16 +269,34 @@ public class MainRcSlabController implements Initializable {
 		} else {
 			System.out.println("1~2way방식 잘못됨.");
 		}
-		
-		
-		//3.
+
+		// 3.
 		// 슬래브 두꼐체크
 
 		slabTHK(slabrebar1, slabspanx, slabspany, slabthk, b1, h1, b2, h2, b3, h3, b4, h4, way2_int);
-		
-		//4.
+
+		// 4.
 		// 슬래브 모멘트
-		
+		// double momentValue[] = {};
+
+		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
+		// switch (way2_int) {
+		// case 1:
+		// slabShortMidMu.setText(momentValue[0] + "");
+		// break;
+		// case 2:
+		// System.out.println("s" + momentValue[0]);
+		// System.err.println("s" + momentValue[1]);
+		// System.err.println("s" + momentValue[2]);
+		// System.err.println("s" + momentValue[3]);
+		// System.err.println("s" + momentValue[4]);
+		// System.err.println("s" + momentValue[5]);
+		// slabShortMidMu.setText(momentValue[3] + "");
+		// break;
+		//
+		// default:
+		// break;
+		// }
 
 	}
 
@@ -305,15 +324,26 @@ public class MainRcSlabController implements Initializable {
 		int b4 = Integer.parseInt(rcSlabB4b.getText());
 		int h4 = Integer.parseInt(rcSlabB4h.getText());
 
-		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
-
+		// Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
+		// slabShortMidMu.setText(momentValue[0] + "");
 	}
-	
-	
-	//모멘트 계산
-	public static void momentcal(double negMoX, double negMoY, double posMoDeadX, double posMoDeadY, double posMoLiveX, double posMoLiveY) {
-		
-		
+
+	public void m1(double negma, double negmb, double posmad, double posmbd, double posmal, double posmbl) {
+		double momentValue[] = { 0, 0, 0, 0, 0, 0 };
+		//
+		momentValue[1] = negmb;
+		momentValue[2] = posmad;
+		momentValue[3] = posmbd;
+		momentValue[4] = posmal;
+		momentValue[5] = posmbl;
+		System.out.println(momentValue[0]);
+		System.err.println("s2" + momentValue[1]);
+		System.err.println("s" + momentValue[2]);
+		System.err.println("s" + momentValue[3]);
+		System.err.println("s" + momentValue[4]);
+		System.err.println("s" + momentValue[5]);
+		System.out.println(slabShortMidMu.getText());
+		slabShortMidMu.setText("1");
 	}
 
 	// 슬래브 두께 체크계산
@@ -404,6 +434,7 @@ public class MainRcSlabController implements Initializable {
 				beama[1] = beamIb2[1] / slabIb2[1];
 				beama[2] = beamIb2[2] / slabIb2[2];
 				beama[3] = beamIb2[3] / slabIb2[3];
+
 				break;
 			case 3:
 				beama[0] = beamIb1[0] / slabIb1[0];
@@ -470,6 +501,12 @@ public class MainRcSlabController implements Initializable {
 			System.out.println("1~2way방식 잘못됨.");
 		}
 	}
+
+	@FXML
+	private RowConstraints mm4;
+
+	@FXML
+	private RowConstraints mm7;
 
 	// 실행화면
 
