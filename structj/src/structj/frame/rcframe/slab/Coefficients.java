@@ -7,8 +7,15 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Coefficients extends MainRcSlabController {
+public class Coefficients {
 	// 엑셀에 있는 모멘트 계수 불러오기
+	static double negMa;
+	static double negMb;
+	static double posMDLa;
+	static double posMDLb;
+	static double posMLLa;
+	static double posMLLb;
+
 	public static void momentcoefficientsAll(int a) { // a : 시트번호
 
 		try {
@@ -1158,7 +1165,7 @@ public class Coefficients extends MainRcSlabController {
 		double factorDL = 0;
 		double factorLL = 0;
 		double factorMax = Math.max(factorDL1 + factorLL1, factorDL2);
-		
+
 		if (factorDL1 + factorLL1 >= factorDL2) {
 			factorDL = factorDL1;
 			factorLL = factorLL1;
@@ -1167,20 +1174,46 @@ public class Coefficients extends MainRcSlabController {
 			factorLL = 0;
 		}
 
-		double negMa = dbs[0] * factorMax * Math.pow(xlength, 2);
-		double negMb = dbslong[0] * factorMax * Math.pow(ylength, 2);
-		double posMDLa = dbs[1] * factorDL * Math.pow(xlength, 2);
-		double posMDLb = dbslong[1] * factorDL * Math.pow(ylength, 2);
-		double posMLLa = dbs[2] * factorLL * Math.pow(xlength, 2);
-		double posMLLb = dbslong[2] * factorLL * Math.pow(ylength, 2);
-		
-		System.out.println(negMa);
-		System.out.println(negMb);
-		System.out.println(posMDLa);
-		System.out.println(posMLLa);
-		System.out.println(posMDLb);
-		
-		MainRcSlabController mo = new MainRcSlabController();
-		mo.m1(negMa,negMb,posMDLa,posMLLa,posMDLb,posMLLb);
+		negMa = dbs[0] * factorMax * Math.pow(xlength, 2);
+		negMb = dbslong[0] * factorMax * Math.pow(ylength, 2);
+		posMDLa = dbs[1] * factorDL * Math.pow(xlength, 2);
+		posMDLb = dbslong[1] * factorDL * Math.pow(ylength, 2);
+		posMLLa = dbs[2] * factorLL * Math.pow(xlength, 2);
+		posMLLb = dbslong[2] * factorLL * Math.pow(ylength, 2);
+
+//		System.out.println(negMa);
+//		System.out.println(negMb);
+//		System.out.println(posMDLa);
+//		System.out.println(posMLLa);
+//		System.out.println(posMDLb);
+
+//		MainRcSlabController mo = new MainRcSlabController();
+		// mo.getSlabShortMidMu().setText(negMa + "");
+		// mo.m1(negMa,negMb,posMDLa,posMLLa,posMDLb,posMLLb);
 	}
+
+	public double negMa() {
+		return negMa;
+	}
+
+	public double negMb() {
+		return negMb;
+	}
+
+	public double posMDLa() {
+		return posMDLa;
+	}
+
+	public double posMDLb() {
+		return posMDLb;
+	}
+
+	public double posMLLa() {
+		return posMLLa;
+	}
+
+	public double posMLLb() {
+		return posMLLb;
+	}
+
 }

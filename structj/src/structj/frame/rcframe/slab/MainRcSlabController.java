@@ -266,37 +266,97 @@ public class MainRcSlabController implements Initializable {
 			way2_int = Integer.parseInt(way2);
 
 			slabSupport.setText("Case -" + way2_int);
+
+			// 모멘트값넣기
+			Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, way2_int);
+			Coefficients coe = new Coefficients();
+			double moval1 = coe.negMa();
+			double moval2 = coe.negMb();
+			double moval3 = coe.posMDLa();
+			double moval4 = coe.posMDLb();
+			double moval5 = coe.posMLLa();
+			double moval6 = coe.posMLLb();
+
+			slabShortMidMu.setText((double) Math.round((moval3 + moval5) * 100) / 100 + "");
+			slabShortConMu.setText((double) Math.round((moval1) * 100) / 100 + "");
+			slabShortDisconMu.setText((double) Math.round(((moval3 + moval5) / 3) * 100) / 100 + "");
+			slabLongMidMu.setText((double) Math.round((moval4 + moval6) * 100) / 100 + "");
+			slabLongConMu.setText((double) Math.round((moval2) * 100) / 100 + "");
+			slabLongDisconMu.setText((double) Math.round(((moval4 + moval6) / 3) * 100) / 100 + "");
+			
+			double ww = 0.9 * 1000 * 134 * 134 * 400;
+			double www = -0.59 * 400 / 20 * 0.9 * 1000 * 134 * 134 * 400;
+			double w = -45740000;
+			System.out.println(w);
+			System.out.println(ww);
+			System.out.println(www);
+			double r = 0.9 * 0.00779 * 1000 * 134 * 134 * 400 * (1 - 0.59 * 400 / 20 * 0.00779);
+			System.out.println(r);
+
+			double a = www, b = ww, c = w;
+			double root;
+			double x1, x2, ans;
+			double deter = (b * b) - (4 * a * c);
+			root = Math.sqrt(deter);
+			if (deter > 0) {
+				// x1 = Math.round(((-1*b) + root) / (2*a));
+				// x2 = Math.round(((-1*b) - root) / (2*a));
+				x1 = (-b + root) / (2 * a);
+				x2 = (-b - root) / (2 * a);
+				System.out.println(x1);
+				System.out.println(x2);
+				ans = Math.min(x1, x2);
+			} else if (deter == 0) {
+				ans = (-b + root) / (2 * a);
+				System.out.println(ans);
+			} else if (deter < 0) {
+				System.out.println("Ratio NG");
+			} else {
+				System.out.println("Ratio NG2");
+			}
+			
+			switch (way2_int) { // 슬래브타입1~9
+			case 1:
+				slabShortConMu.setText(" - ");
+				slabLongConMu.setText(" - ");
+				break;
+			case 2:
+				slabShortDisconMu.setText(" - ");
+				slabLongDisconMu.setText(" - ");
+				break;
+			case 3:
+				slabShortConMu.setText(" - ");
+				slabLongDisconMu.setText(" - ");
+				break;
+			case 4:
+				break;
+			case 5:
+				slabLongConMu.setText(" - ");
+				slabShortDisconMu.setText(" - ");
+				break;
+			case 6:
+				slabLongConMu.setText(" - ");
+				break;
+			case 7:
+				slabShortConMu.setText(" - ");
+				break;
+			case 8:
+				slabLongDisconMu.setText(" - ");
+				break;
+			case 9:
+				slabShortDisconMu.setText(" - ");
+				break;
+			default:
+				break;
+			}
+
 		} else {
 			System.out.println("1~2way방식 잘못됨.");
 		}
 
 		// 3.
 		// 슬래브 두꼐체크
-
 		slabTHK(slabrebar1, slabspanx, slabspany, slabthk, b1, h1, b2, h2, b3, h3, b4, h4, way2_int);
-
-		// 4.
-		// 슬래브 모멘트
-		// double momentValue[] = {};
-
-		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
-		// switch (way2_int) {
-		// case 1:
-		// slabShortMidMu.setText(momentValue[0] + "");
-		// break;
-		// case 2:
-		// System.out.println("s" + momentValue[0]);
-		// System.err.println("s" + momentValue[1]);
-		// System.err.println("s" + momentValue[2]);
-		// System.err.println("s" + momentValue[3]);
-		// System.err.println("s" + momentValue[4]);
-		// System.err.println("s" + momentValue[5]);
-		// slabShortMidMu.setText(momentValue[3] + "");
-		// break;
-		//
-		// default:
-		// break;
-		// }
 
 	}
 
@@ -326,24 +386,37 @@ public class MainRcSlabController implements Initializable {
 
 		// Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
 		// slabShortMidMu.setText(momentValue[0] + "");
-	}
+		double ww = 0.9 * 1000 * 134 * 134 * 400;
+		double www = -0.59 * 400 / 20 * 0.9 * 1000 * 134 * 134 * 400;
+		double w = -45740000;
+		System.out.println(w);
+		System.out.println(ww);
+		System.out.println(www);
+		double r = 0.9 * 0.00779 * 1000 * 134 * 134 * 400 * (1 - 0.59 * 400 / 20 * 0.00779);
+		System.out.println(r);
 
-	public void m1(double negma, double negmb, double posmad, double posmbd, double posmal, double posmbl) {
-		double momentValue[] = { 0, 0, 0, 0, 0, 0 };
-		//
-		momentValue[1] = negmb;
-		momentValue[2] = posmad;
-		momentValue[3] = posmbd;
-		momentValue[4] = posmal;
-		momentValue[5] = posmbl;
-		System.out.println(momentValue[0]);
-		System.err.println("s2" + momentValue[1]);
-		System.err.println("s" + momentValue[2]);
-		System.err.println("s" + momentValue[3]);
-		System.err.println("s" + momentValue[4]);
-		System.err.println("s" + momentValue[5]);
-		System.out.println(slabShortMidMu.getText());
-		slabShortMidMu.setText("1");
+		double a = www, b = ww, c = w;
+		double root;
+		double x1, x2, ans;
+		double deter = (b * b) - (4 * a * c);
+		root = Math.sqrt(deter);
+		if (deter > 0) {
+			// x1 = Math.round(((-1*b) + root) / (2*a));
+			// x2 = Math.round(((-1*b) - root) / (2*a));
+			x1 = (-b + root) / (2 * a);
+			x2 = (-b - root) / (2 * a);
+			System.out.println(x1);
+			System.out.println(x2);
+			ans = Math.min(x1, x2);
+		} else if (deter == 0) {
+			ans = (-b + root) / (2 * a);
+			System.out.println(ans);
+		} else if (deter < 0) {
+			System.out.println("Ratio NG");
+		} else {
+			System.out.println("Ratio NG2");
+		}
+
 	}
 
 	// 슬래브 두께 체크계산
