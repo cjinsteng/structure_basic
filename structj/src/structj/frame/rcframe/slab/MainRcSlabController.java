@@ -47,6 +47,12 @@ public class MainRcSlabController implements Initializable {
 			"D32");
 
 	@FXML
+	private ComboBox<String> rebarDia0;
+
+	ObservableList<String> list0 = FXCollections.observableArrayList("D10", "D13", "D16", "D19", "D22", "D25", "D29",
+			"D32");
+
+	@FXML
 	private ComboBox<ImageView> rcSlabWay2box;
 
 	@FXML
@@ -136,18 +142,63 @@ public class MainRcSlabController implements Initializable {
 	@FXML
 	private Button slabup4;
 
+	@FXML
+	void onSeletDia1(ActionEvent event) {
+		if (rebarDia1.getValue() == "D10") {
+			rebarDia2.setValue("D13");
+		} else if (rebarDia1.getValue() == "D13") {
+			rebarDia2.setValue("D16");
+		} else if (rebarDia1.getValue() == "D16") {
+			rebarDia2.setValue("D19");
+		} else if (rebarDia1.getValue() == "D19") {
+			rebarDia2.setValue("D22");
+		} else if (rebarDia1.getValue() == "D22") {
+			rebarDia2.setValue("D25");
+		} else if (rebarDia1.getValue() == "D25") {
+			rebarDia2.setValue("D29");
+		} else if (rebarDia1.getValue() == "D29") {
+			rebarDia2.setValue("D32");
+		} else if (rebarDia1.getValue() == "D32") {
+			rebarDia2.setValue("D35");
+		}
+	}
+
+	@FXML
+	void onSeletDia2(ActionEvent event) {
+		if (rebarDia2.getValue() == "D10") {
+			rebarDia1.setValue("D8");
+		} else if (rebarDia2.getValue() == "D13") {
+			rebarDia1.setValue("D10");
+		} else if (rebarDia2.getValue() == "D16") {
+			rebarDia1.setValue("D13");
+		} else if (rebarDia2.getValue() == "D19") {
+			rebarDia1.setValue("D16");
+		} else if (rebarDia2.getValue() == "D22") {
+			rebarDia1.setValue("D19");
+		} else if (rebarDia2.getValue() == "D25") {
+			rebarDia1.setValue("D22");
+		} else if (rebarDia2.getValue() == "D29") {
+			rebarDia1.setValue("D25");
+		} else if (rebarDia2.getValue() == "D32") {
+			rebarDia1.setValue("D29");
+		}
+	}
+
 	// 실행시 바로적용되는것들
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		rebarDia1.setItems(list);
 		rebarDia2.setItems(list2);
+		rebarDia0.setItems(list0);
+		double ast[] = {71.33,126.7,198.6,286.5,387.1,506.7,642.4,794.2,956.6,1140.0};
 
 		rcSlabWay1Table.setVisible(false);
 		rcSlabWay2Table.setVisible(false);
 
 		rebarDia1.setValue("D13");
 		rebarDia2.setValue("D16");
+		rebarDia0.setValue("D10");
 
 		// 1. 표 라인 생성
 		slabSheet1.setGridLinesVisible(true);
@@ -210,6 +261,7 @@ public class MainRcSlabController implements Initializable {
 		int slabcon = Integer.parseInt(rcSlabCon.getText()); // gettext는 String Integer를 써서 int로 변환.
 		int dia1 = Integer.parseInt((rebarDia1.getValue()).substring(1)); // substring > 문자열 몇번째부터 가져올것인지.
 		int dia2 = Integer.parseInt((rebarDia2.getValue()).substring(1));
+		int dia0 = Integer.parseInt((rebarDia0.getValue()).substring(1));
 		int slabrebar1 = Integer.parseInt(RebarFy1.getText());
 		int slabrebar2 = Integer.parseInt(RebarFy2.getText());
 		double slabspanx = Double.parseDouble(rcSlabSpanx.getText());
@@ -227,6 +279,13 @@ public class MainRcSlabController implements Initializable {
 		int b4 = Integer.parseInt(rcSlabB4b.getText());
 		int h4 = Integer.parseInt(rcSlabB4h.getText());
 		int way2_int = 0;
+		int fy;
+
+		if (dia0 <= dia1) {
+			fy = slabrebar1;
+		} else {
+			fy = slabrebar2;
+		}
 
 		// 실행화면
 		slabSpanx.setText(String.format("%.2f", slabspanx) + " m");
@@ -283,38 +342,136 @@ public class MainRcSlabController implements Initializable {
 			slabLongMidMu.setText((double) Math.round((moval4 + moval6) * 100) / 100 + "");
 			slabLongConMu.setText((double) Math.round((moval2) * 100) / 100 + "");
 			slabLongDisconMu.setText((double) Math.round(((moval4 + moval6) / 3) * 100) / 100 + "");
-			
-			double ww = 0.9 * 1000 * 134 * 134 * 400;
-			double www = -0.59 * 400 / 20 * 0.9 * 1000 * 134 * 134 * 400;
-			double w = -45740000;
-			System.out.println(w);
+
+			double pie = 0.9;
+			double depth = slabthk - slabcover - dia0 / 2;
+			double depthLong = slabthk - slabcover - dia0 - dia0 / 2;
+
+			double ww = pie * 1000 * Math.pow(depth, 2) * fy;
+			double ww2 = pie * 1000 * Math.pow(depthLong, 2) * fy;
+			double www = -0.59 * fy / slabcon * pie * 1000 * Math.pow(depth, 2) * fy;
+			double www2 = -0.59 * fy / slabcon * pie * 1000 * Math.pow(depthLong, 2) * fy;
+			double w[] = { moval3 + moval5, moval1, (moval3 + moval5) / 3, moval4 + moval6, moval2,
+					(moval4 + moval6) / 3 };
+			String muratio[] = { "", "", "", "", "", "" };
+			double muratio2[] = { 0, 0, 0, 0, 0, 0 };
+			double ratioAs[] = { 0, 0, 0, 0, 0, 0 };
+
+			System.out.println(depth);
+			System.out.println(fy);
+			System.out.println(slabcon);
 			System.out.println(ww);
 			System.out.println(www);
-			double r = 0.9 * 0.00779 * 1000 * 134 * 134 * 400 * (1 - 0.59 * 400 / 20 * 0.00779);
-			System.out.println(r);
+			System.out.println(w[0]);
+			System.out.println(w[1]);
+			System.out.println(w[2]);
+			System.out.println(w[3]);
+			System.out.println(w[4]);
+			System.out.println(w[5]);
 
-			double a = www, b = ww, c = w;
-			double root;
-			double x1, x2, ans;
-			double deter = (b * b) - (4 * a * c);
-			root = Math.sqrt(deter);
-			if (deter > 0) {
-				// x1 = Math.round(((-1*b) + root) / (2*a));
-				// x2 = Math.round(((-1*b) - root) / (2*a));
-				x1 = (-b + root) / (2 * a);
-				x2 = (-b - root) / (2 * a);
-				System.out.println(x1);
-				System.out.println(x2);
-				ans = Math.min(x1, x2);
-			} else if (deter == 0) {
-				ans = (-b + root) / (2 * a);
-				System.out.println(ans);
-			} else if (deter < 0) {
-				System.out.println("Ratio NG");
-			} else {
-				System.out.println("Ratio NG2");
+			// 모멘트비 철근ratio구하기
+			for (int i = 0; i < w.length; i++) {
+				double a, b, c = w[i] * 1000000;
+				if (i < 3) {
+					a = www;
+					b = ww;
+				} else {
+					a = www2;
+					b = ww2;
+				}
+				double root;
+				double x1, x2, ans;
+				double deter = (b * b) - (4 * a * c);
+				root = Math.sqrt(deter);
+				if (deter > 0) {
+					// x1 = Math.round(((-1*b) + root) / (2*a));
+					// x2 = Math.round(((-1*b) - root) / (2*a));
+					x1 = (-b + root) / (2 * a);
+					x2 = (-b - root) / (2 * a);
+					ans = Math.abs(Math.min(x1, x2) * 100);
+					muratio[i] = String.format("%.3f", ans);
+					muratio2[i] = ans;
+				} else if (deter == 0) {
+					ans = Math.abs(((-b + root) / (2 * a)) * 100);
+					muratio[i] = String.format("%.3f", ans);
+					muratio2[i] = ans;
+				} else if (deter < 0) {
+					System.out.println("Ratio NG");
+				} else {
+					System.out.println("Ratio NG2");
+				}
 			}
-			
+			slabShortMidRatio.setText(muratio[0]);
+			slabShortConRatio.setText(muratio[1]);
+			slabShortDisconRatio.setText(muratio[2]);
+			slabLongMidRatio.setText(muratio[3]);
+			slabLongConRatio.setText(muratio[4]);
+			slabLongDisconRatio.setText(muratio[5]);
+
+			// 모멘트비에따라 철근량 산정
+			for (int i = 0; i < muratio2.length; i++) {
+				if (i < 3) {
+					ratioAs[i] = muratio2[i] / 100 * 1000 * depth;
+				} else {
+					ratioAs[i] = muratio2[i] / 100 * 1000 * depthLong;
+				}
+			}
+			slabShortMidAst.setText(Math.round(ratioAs[0]) + "");
+			slabShortConAst.setText(Math.round(ratioAs[1]) + "");
+			slabShortDisconAst.setText(Math.round(ratioAs[2]) + "");
+			slabLongMidAst.setText(Math.round(ratioAs[3]) + "");
+			slabLongConAst.setText(Math.round(ratioAs[4]) + "");
+			slabLongDisconAst.setText(Math.round(ratioAs[5]) + "");
+
+			// 철근에 맞춰 간격산정
+			slabDia1.setText(rebarDia0.getValue());
+			switch (rebarDia0.getValue()) {
+			case "D10":
+				slabDia3.setText(list0.get(1));	//D13
+				slabDia2.setText(list0.get(0) + "+" + list0.get(1));
+				slabDia4.setText(list0.get(1) + "+" + list0.get(2));
+				break;
+			case "D13":
+				slabDia3.setText(list0.get(2));	//D13
+				slabDia2.setText(list0.get(1) + "+" + list0.get(2));
+				slabDia4.setText(list0.get(2) + "+" + list0.get(3));
+				break;
+			case "D16":
+				slabDia3.setText(list0.get(3));	//D13
+				slabDia2.setText(list0.get(2) + "+" + list0.get(3));
+				slabDia4.setText(list0.get(3) + "+" + list0.get(4));
+				break;
+			case "D19":
+				slabDia3.setText(list0.get(4));	//D13
+				slabDia2.setText(list0.get(3) + "+" + list0.get(4));
+				slabDia4.setText(list0.get(4) + "+" + list0.get(5));
+				break;
+			case "D22":
+				slabDia3.setText(list0.get(5));	//D13
+				slabDia2.setText(list0.get(4) + "+" + list0.get(5));
+				slabDia4.setText(list0.get(5) + "+" + list0.get(6));
+				break;
+			case "D25":
+				slabDia3.setText(list0.get(6));	//D13
+				slabDia2.setText(list0.get(5) + "+" + list0.get(6));
+				slabDia4.setText(list0.get(6) + "+" + list0.get(7));
+				break;
+			case "D29":
+				slabDia3.setText(list0.get(7));	//D13
+				slabDia2.setText(list0.get(6) + "+" + list0.get(7));
+				slabDia4.setText(list0.get(7) + "+" + "D35");
+				break;
+			case "D32":
+				slabDia3.setText("D35");	//D13
+				slabDia2.setText(list0.get(7) + "+" + "D35");
+				slabDia4.setText("D35" + "+" + "D38");
+				break;
+			default:
+				break;
+			}
+			//슬래브 간격산정.
+//			slabShortMid1.
+
 			switch (way2_int) { // 슬래브타입1~9
 			case 1:
 				slabShortConMu.setText(" - ");
@@ -384,38 +541,10 @@ public class MainRcSlabController implements Initializable {
 		int b4 = Integer.parseInt(rcSlabB4b.getText());
 		int h4 = Integer.parseInt(rcSlabB4h.getText());
 
-		// Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, 1);
-		// slabShortMidMu.setText(momentValue[0] + "");
-		double ww = 0.9 * 1000 * 134 * 134 * 400;
-		double www = -0.59 * 400 / 20 * 0.9 * 1000 * 134 * 134 * 400;
-		double w = -45740000;
-		System.out.println(w);
-		System.out.println(ww);
-		System.out.println(www);
-		double r = 0.9 * 0.00779 * 1000 * 134 * 134 * 400 * (1 - 0.59 * 400 / 20 * 0.00779);
-		System.out.println(r);
-
-		double a = www, b = ww, c = w;
-		double root;
-		double x1, x2, ans;
-		double deter = (b * b) - (4 * a * c);
-		root = Math.sqrt(deter);
-		if (deter > 0) {
-			// x1 = Math.round(((-1*b) + root) / (2*a));
-			// x2 = Math.round(((-1*b) - root) / (2*a));
-			x1 = (-b + root) / (2 * a);
-			x2 = (-b - root) / (2 * a);
-			System.out.println(x1);
-			System.out.println(x2);
-			ans = Math.min(x1, x2);
-		} else if (deter == 0) {
-			ans = (-b + root) / (2 * a);
-			System.out.println(ans);
-		} else if (deter < 0) {
-			System.out.println("Ratio NG");
-		} else {
-			System.out.println("Ratio NG2");
-		}
+		System.out.println(list0.get(0));
+		System.out.println(list0.get(1));
+		System.out.println(list0.get(2));
+		System.out.println(list0.toString());
 
 	}
 
@@ -645,6 +774,18 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	private Label slabThickness3;
+
+	@FXML
+	private Label slabDia1;
+
+	@FXML
+	private Label slabDia2;
+
+	@FXML
+	private Label slabDia3;
+
+	@FXML
+	private Label slabDia4;
 
 	@FXML
 	private Label slabShortMidMu;

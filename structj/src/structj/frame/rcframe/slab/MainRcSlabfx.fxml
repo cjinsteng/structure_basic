@@ -131,7 +131,7 @@
 															<children>
 																<HBox>
 																	<children>
-																		<ComboBox fx:id="rebarDia1" editable="true" prefWidth="180.0" promptText="D13" visibleRowCount="8">
+																		<ComboBox fx:id="rebarDia1" editable="true" onAction="#onSeletDia1" prefWidth="180.0" promptText="D13" visibleRowCount="8">
 																			<HBox.margin>
 																				<Insets />
 																			</HBox.margin>
@@ -146,7 +146,7 @@
 																<Separator opacity="0.0" prefHeight="5.0" prefWidth="200.0" />
 																<HBox>
 																	<children>
-																		<ComboBox fx:id="rebarDia2" editable="true" prefWidth="180.0" promptText="D16" visibleRowCount="8" />
+																		<ComboBox fx:id="rebarDia2" editable="true" onAction="#onSeletDia2" prefWidth="180.0" promptText="D16" visibleRowCount="8" />
 																		<TextField fx:id="RebarFy2" text="500">
 																			<HBox.margin>
 																				<Insets left="15.0" />
@@ -247,14 +247,14 @@
 										</VBox>
 									</children>
 								</StackPane>
-								<StackPane prefHeight="150.0" prefWidth="200.0">
+								<StackPane prefHeight="100.0" prefWidth="200.0">
 									<children>
 										<ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-										<VBox prefHeight="150.0" prefWidth="100.0">
+										<VBox prefHeight="100.0" prefWidth="100.0">
 											<children>
 												<Label text="Load">
 													<VBox.margin>
-														<Insets bottom="10.0" left="15.0" top="5.0" />
+														<Insets bottom="5.0" left="15.0" top="5.0" />
 													</VBox.margin>
 												</Label>
 												<HBox prefWidth="200.0">
@@ -274,7 +274,7 @@
 														</TextField>
 													</children>
 												</HBox>
-												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
+												<Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
 												<HBox prefWidth="200.0">
 													<children>
 														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LiveLoad   :" textAlignment="RIGHT">
@@ -292,10 +292,48 @@
 														</TextField>
 													</children>
 												</HBox>
+												<Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
+											</children>
+										</VBox>
+									</children>
+									<VBox.margin>
+										<Insets top="10.0" />
+									</VBox.margin>
+								</StackPane>
+								<StackPane prefHeight="100.0" prefWidth="200.0">
+									<children>
+										<ImageView fitHeight="70.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
+										<VBox prefHeight="100.0" prefWidth="100.0">
+											<children>
+												<Label text="Rebar">
+													<VBox.margin>
+														<Insets bottom="10.0" left="15.0" top="5.0" />
+													</VBox.margin>
+												</Label>
+												<HBox prefWidth="200.0">
+													<children>
+														<Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Use Rebar   :" textAlignment="RIGHT">
+															<padding>
+																<Insets left="10.0" right="20.0" />
+															</padding>
+															<HBox.margin>
+																<Insets left="20.0" />
+															</HBox.margin>
+														</Label>
+														<ComboBox fx:id="rebarDia0" editable="true" prefWidth="90.0" promptText="D10" visibleRowCount="8">
+															<HBox.margin>
+																<Insets left="10.0" />
+															</HBox.margin>
+														</ComboBox>
+													</children>
+												</HBox>
 												<Separator opacity="0.0" prefHeight="20.0" prefWidth="200.0" />
 											</children>
 										</VBox>
 									</children>
+									<VBox.margin>
+										<Insets top="10.0" />
+									</VBox.margin>
 								</StackPane>
 								<HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="200.0">
 									<children>
@@ -1052,22 +1090,22 @@
 																<Font size="11.0" />
 															</font>
 														</Label>
-														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
+														<Label fx:id="slabDia1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
 															<font>
 																<Font size="11.0" />
 															</font>
 														</Label>
-														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10+D13" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
+														<Label fx:id="slabDia2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D10+D13" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
 															<font>
 																<Font size="11.0" />
 															</font>
 														</Label>
-														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
+														<Label fx:id="slabDia3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
 															<font>
 																<Font size="11.0" />
 															</font>
 														</Label>
-														<Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13+D16" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
+														<Label fx:id="slabDia4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="D13+D16" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1">
 															<font>
 																<Font size="11.0" />
 															</font>
