@@ -3,6 +3,8 @@ package structj.frame.rcframe.slab;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.org.apache.bcel.internal.generic.ASTORE;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -191,7 +193,6 @@ public class MainRcSlabController implements Initializable {
 		rebarDia1.setItems(list);
 		rebarDia2.setItems(list2);
 		rebarDia0.setItems(list0);
-		double ast[] = {71.33,126.7,198.6,286.5,387.1,506.7,642.4,794.2,956.6,1140.0};
 
 		rcSlabWay1Table.setVisible(false);
 		rcSlabWay2Table.setVisible(false);
@@ -280,6 +281,8 @@ public class MainRcSlabController implements Initializable {
 		int h4 = Integer.parseInt(rcSlabB4h.getText());
 		int way2_int = 0;
 		int fy;
+		double ast[][] = { { 10, 71.33 }, { 13, 126.7 }, { 16, 198.6 }, { 19, 286.5 }, { 22, 387.1 }, { 25, 506.7 },
+				{ 29, 642.4 }, { 32, 794.2 }, { 35, 956.6 }, { 39, 1140.0 } };
 
 		if (dia0 <= dia1) {
 			fy = slabrebar1;
@@ -425,52 +428,108 @@ public class MainRcSlabController implements Initializable {
 
 			// 철근에 맞춰 간격산정
 			slabDia1.setText(rebarDia0.getValue());
+			double astval[] = { 0, 0, 0, 0 };
+			for (int i = 0; i < ast.length; i++) {
+				if (dia0 == ast[i][0]) {
+					astval[0] = ast[i][1];
+					astval[1] = (ast[i][1] + ast[i + 1][1]) / 2;
+					astval[2] = ast[i + 1][1];
+					astval[3] = (ast[i + 1][1] + ast[i + 2][1]) / 2;
+				}
+			}
 			switch (rebarDia0.getValue()) {
 			case "D10":
-				slabDia3.setText(list0.get(1));	//D13
+				slabDia3.setText(list0.get(1)); // D13
 				slabDia2.setText(list0.get(0) + "+" + list0.get(1));
 				slabDia4.setText(list0.get(1) + "+" + list0.get(2));
 				break;
 			case "D13":
-				slabDia3.setText(list0.get(2));	//D13
+				slabDia3.setText(list0.get(2)); // D13
 				slabDia2.setText(list0.get(1) + "+" + list0.get(2));
 				slabDia4.setText(list0.get(2) + "+" + list0.get(3));
 				break;
 			case "D16":
-				slabDia3.setText(list0.get(3));	//D13
+				slabDia3.setText(list0.get(3)); // D13
 				slabDia2.setText(list0.get(2) + "+" + list0.get(3));
 				slabDia4.setText(list0.get(3) + "+" + list0.get(4));
 				break;
 			case "D19":
-				slabDia3.setText(list0.get(4));	//D13
+				slabDia3.setText(list0.get(4)); // D13
 				slabDia2.setText(list0.get(3) + "+" + list0.get(4));
 				slabDia4.setText(list0.get(4) + "+" + list0.get(5));
 				break;
 			case "D22":
-				slabDia3.setText(list0.get(5));	//D13
+				slabDia3.setText(list0.get(5)); // D13
 				slabDia2.setText(list0.get(4) + "+" + list0.get(5));
 				slabDia4.setText(list0.get(5) + "+" + list0.get(6));
 				break;
 			case "D25":
-				slabDia3.setText(list0.get(6));	//D13
+				slabDia3.setText(list0.get(6)); // D13
 				slabDia2.setText(list0.get(5) + "+" + list0.get(6));
 				slabDia4.setText(list0.get(6) + "+" + list0.get(7));
 				break;
 			case "D29":
-				slabDia3.setText(list0.get(7));	//D13
+				slabDia3.setText(list0.get(7)); // D13
 				slabDia2.setText(list0.get(6) + "+" + list0.get(7));
 				slabDia4.setText(list0.get(7) + "+" + "D35");
 				break;
 			case "D32":
-				slabDia3.setText("D35");	//D13
+				slabDia3.setText("D35"); // D13
 				slabDia2.setText(list0.get(7) + "+" + "D35");
 				slabDia4.setText("D35" + "+" + "D38");
 				break;
 			default:
 				break;
 			}
-			//슬래브 간격산정.
-//			slabShortMid1.
+			// 슬래브 간격산정.
+			int span[][] = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 } };
+			int spanmax = 300;
+			for (int j = 0; j < ratioAs.length; j++) {
+				for (int z = 0; z < astval.length; z++) {
+					int as = (int) Math.floor(1000 / (ratioAs[j] / astval[z])/10)*10;
+					span[j][z] = Math.min(as, spanmax);
+				}
+			}
+			slabShortMid1.setText("@" + span[0][0]);
+			slabShortMid2.setText("@" + span[0][1]);
+			slabShortMid3.setText("@" + span[0][2]);
+			slabShortMid4.setText("@" + span[0][3]);
+			slabShortCon1.setText("@" + span[1][0]);
+			slabShortCon2.setText("@" + span[1][1]);
+			slabShortCon3.setText("@" + span[1][2]);
+			slabShortCon4.setText("@" + span[1][3]);
+			slabShortDiscon1.setText("@" + span[2][0]);
+			slabShortDiscon2.setText("@" + span[2][1]);
+			slabShortDiscon3.setText("@" + span[2][2]);
+			slabShortDiscon4.setText("@" + span[2][3]);
+			slabLongMid1.setText("@" + span[3][0]);
+			slabLongMid2.setText("@" + span[3][1]);
+			slabLongMid3.setText("@" + span[3][2]);
+			slabLongMid4.setText("@" + span[3][3]);
+			slabLongCon1.setText("@" + span[4][0]);
+			slabLongCon2.setText("@" + span[4][1]);
+			slabLongCon3.setText("@" + span[4][2]);
+			slabLongCon4.setText("@" + span[4][3]);
+			slabLongDiscon1.setText("@" + span[5][0]);
+			slabLongDiscon2.setText("@" + span[5][1]);
+			slabLongDiscon3.setText("@" + span[5][2]);
+			slabLongDiscon4.setText("@" + span[5][3]);
+			
+			//최소철근비
+			double minratio = 0.002 * 400 / fy;
+			double minAst = 1000 * slabthk * minratio;
+			int minspan[] = new int[4];
+			for (int z = 0; z < minspan.length; z++) {
+				int as = (int) Math.floor(1000 / (minAst / astval[z])/10)*10;
+				minspan[z] = Math.min(as, spanmax);
+			}
+			slabMinRebarRatio.setText(String.format("%.4f", minratio));
+			slabMinRebarAst.setText(Math.round(minAst) + "");
+			slabMinRebar1.setText("@" + minspan[0]);
+			slabMinRebar2.setText("@" + minspan[1]);
+			slabMinRebar3.setText("@" + minspan[2]);
+			slabMinRebar4.setText("@" + minspan[3]);
 
 			switch (way2_int) { // 슬래브타입1~9
 			case 1:
@@ -515,6 +574,41 @@ public class MainRcSlabController implements Initializable {
 		// 슬래브 두꼐체크
 		slabTHK(slabrebar1, slabspanx, slabspany, slabthk, b1, h1, b2, h2, b3, h3, b4, h4, way2_int);
 
+
+		
+		
+		//전단
+		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, way2_int);
+		Coefficients coe = new Coefficients();
+		double vua = coe.coeVua();
+		double vub = coe.coeVub();
+		
+		double fator = 0.75;
+		double depth = slabthk - slabcover - dia0 / 2;
+		double depthLong = slabthk - slabcover - dia0 - dia0 / 2;
+		double vca = fator * Math.sqrt(slabcon) / 6 * 1000 * depth / 1000;
+		double vcb = fator * Math.sqrt(slabcon) / 6 * 1000 * depthLong / 1000;
+		
+		shearFator.setText(fator + "");
+		rcSlabVu1.setText((vua * slabspanx / 2) + "");
+		rcSlabVu2.setText((vub * slabspany / 2) + "");
+		rcSlabVc1.setText(String.format("%.2f", vca));
+		rcSlabVc2.setText(String.format("%.2f", vcb));
+		
+		if (vca >= (vua * slabspanx / 2)) {
+			rcSlabShear1.setText("<");
+			rcSlabShearResult1.setText("O.K.");
+		} else {
+			rcSlabShear1.setText(">");
+			rcSlabShearResult1.setText("N.G.");			
+		}
+		if (vcb >= (vub * slabspany / 2)) {
+			rcSlabShear2.setText("<");
+			rcSlabShearResult2.setText("O.K.");
+		} else {
+			rcSlabShear2.setText(">");
+			rcSlabShearResult2.setText("N.G.");			
+		}
 	}
 
 	@FXML
@@ -541,10 +635,14 @@ public class MainRcSlabController implements Initializable {
 		int b4 = Integer.parseInt(rcSlabB4b.getText());
 		int h4 = Integer.parseInt(rcSlabB4h.getText());
 
+		double ast[][] = { { 10, 71.33 }, { 13, 126.7 }, { 16, 198.6 }, { 19, 286.5 }, { 22, 387.1 }, { 25, 506.7 },
+				{ 29, 642.4 }, { 32, 794.2 }, { 35, 956.6 }, { 39, 1140.0 } };
+
 		System.out.println(list0.get(0));
 		System.out.println(list0.get(1));
 		System.out.println(list0.get(2));
 		System.out.println(list0.toString());
+		System.out.println(ast.length);
 
 	}
 
@@ -930,6 +1028,9 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	private Label slabMinRebar4;
+	
+    @FXML
+    private Label shearFator;
 
 	@FXML
 	private Label rcSlabVu1;

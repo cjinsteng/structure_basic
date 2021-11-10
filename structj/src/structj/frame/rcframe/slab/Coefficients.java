@@ -15,6 +15,8 @@ public class Coefficients {
 	static double posMDLb;
 	static double posMLLa;
 	static double posMLLb;
+	static double coeWuva;
+	static double coeWuvb;
 
 	public static void momentcoefficientsAll(int a) { // a : 시트번호
 
@@ -140,9 +142,9 @@ public class Coefficients {
 		// System.out.println(momentcoefficients(0, 1, 1));
 
 		double lenRatio = xlength / ylength;
-		int a = 3; // 시트갯수 3개(0,1,2) 3시트는 전단
-		double[] dbs = new double[3];
-		double[] dbslong = new double[3];
+		int a = 4; // 시트갯수 3개(0,1,2) 3시트는 전단
+		double[] dbs = new double[4];
+		double[] dbslong = new double[4];
 		double gap = 0.05;
 		double x1;
 		double x2;
@@ -1180,6 +1182,8 @@ public class Coefficients {
 		posMDLb = dbslong[1] * factorDL * Math.pow(ylength, 2);
 		posMLLa = dbs[2] * factorLL * Math.pow(xlength, 2);
 		posMLLb = dbslong[2] * factorLL * Math.pow(ylength, 2);
+		coeWuva = dbs[3]*(factorDL+factorLL);
+		coeWuvb = dbslong[3]*(factorDL+factorLL);
 
 //		System.out.println(negMa);
 //		System.out.println(negMb);
@@ -1214,6 +1218,13 @@ public class Coefficients {
 
 	public double posMLLb() {
 		return posMLLb;
+	}
+	
+	public double coeVua() {
+		return coeWuva;
+	}
+	public double coeVub() {
+		return coeWuvb;
 	}
 
 }
