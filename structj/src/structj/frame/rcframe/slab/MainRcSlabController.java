@@ -3,23 +3,24 @@ package structj.frame.rcframe.slab;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.org.apache.bcel.internal.generic.ASTORE;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
@@ -27,6 +28,10 @@ import javafx.scene.layout.VBox;
 public class MainRcSlabController implements Initializable {
 
 	//
+
+	@FXML
+	private ListView<String> slabList;
+
 	@FXML
 	public TextField rcSlabName;
 
@@ -193,6 +198,7 @@ public class MainRcSlabController implements Initializable {
 		rebarDia1.setItems(list);
 		rebarDia2.setItems(list2);
 		rebarDia0.setItems(list0);
+		slabList.getItems().add("S1");
 
 		rcSlabWay1Table.setVisible(false);
 		rcSlabWay2Table.setVisible(false);
@@ -487,7 +493,7 @@ public class MainRcSlabController implements Initializable {
 			int spanmax = 300;
 			for (int j = 0; j < ratioAs.length; j++) {
 				for (int z = 0; z < astval.length; z++) {
-					int as = (int) Math.floor(1000 / (ratioAs[j] / astval[z])/10)*10;
+					int as = (int) Math.floor(1000 / (ratioAs[j] / astval[z]) / 10) * 10;
 					span[j][z] = Math.min(as, spanmax);
 				}
 			}
@@ -515,13 +521,13 @@ public class MainRcSlabController implements Initializable {
 			slabLongDiscon2.setText("@" + span[5][1]);
 			slabLongDiscon3.setText("@" + span[5][2]);
 			slabLongDiscon4.setText("@" + span[5][3]);
-			
-			//최소철근비
+
+			// 최소철근비
 			double minratio = 0.002 * 400 / fy;
 			double minAst = 1000 * slabthk * minratio;
 			int minspan[] = new int[4];
 			for (int z = 0; z < minspan.length; z++) {
-				int as = (int) Math.floor(1000 / (minAst / astval[z])/10)*10;
+				int as = (int) Math.floor(1000 / (minAst / astval[z]) / 10) * 10;
 				minspan[z] = Math.min(as, spanmax);
 			}
 			slabMinRebarRatio.setText(String.format("%.4f", minratio));
@@ -574,41 +580,62 @@ public class MainRcSlabController implements Initializable {
 		// 슬래브 두꼐체크
 		slabTHK(slabrebar1, slabspanx, slabspany, slabthk, b1, h1, b2, h2, b3, h3, b4, h4, way2_int);
 
-
-		
-		
-		//전단
+		// 전단
 		Coefficients.moment(slabspanx, slabspany, slabdl, slabll, 2, way2_int);
 		Coefficients coe = new Coefficients();
 		double vua = coe.coeVua();
 		double vub = coe.coeVub();
-		
+
 		double fator = 0.75;
 		double depth = slabthk - slabcover - dia0 / 2;
 		double depthLong = slabthk - slabcover - dia0 - dia0 / 2;
 		double vca = fator * Math.sqrt(slabcon) / 6 * 1000 * depth / 1000;
 		double vcb = fator * Math.sqrt(slabcon) / 6 * 1000 * depthLong / 1000;
-		
+
 		shearFator.setText(fator + "");
 		rcSlabVu1.setText((vua * slabspanx / 2) + "");
 		rcSlabVu2.setText((vub * slabspany / 2) + "");
 		rcSlabVc1.setText(String.format("%.2f", vca));
 		rcSlabVc2.setText(String.format("%.2f", vcb));
-		
+
 		if (vca >= (vua * slabspanx / 2)) {
 			rcSlabShear1.setText("<");
 			rcSlabShearResult1.setText("O.K.");
 		} else {
 			rcSlabShear1.setText(">");
-			rcSlabShearResult1.setText("N.G.");			
+			rcSlabShearResult1.setText("N.G.");
 		}
 		if (vcb >= (vub * slabspany / 2)) {
 			rcSlabShear2.setText("<");
 			rcSlabShearResult2.setText("O.K.");
 		} else {
 			rcSlabShear2.setText(">");
-			rcSlabShearResult2.setText("N.G.");			
+			rcSlabShearResult2.setText("N.G.");
 		}
+
+		// slabList.setItems(FXCollections.observableArrayList()); //list초기화
+
+		slabList.getItems().add(slabname);
+
+	}
+	
+	String[][] data;
+	public void db() {
+		int co = slabList.getItems().toString().length();
+		data[co][0] = "3";
+	
+	}
+
+	@FXML
+	void onListClick(MouseEvent event) {
+		// ListView<String> listView = new ListView<>();
+		// ObservableList<String> selectlist = slabList.get;
+		// System.out.println(selectlist);
+		Object obj = slabList.getSelectionModel().getSelectedItem();
+		String obj2 = slabList.getSelectionModel().getSelectedItem().toString();
+		System.out.println(obj);
+		System.out.println(obj2);
+		System.out.println(slabList.getItems().toString());
 	}
 
 	@FXML
@@ -1028,9 +1055,9 @@ public class MainRcSlabController implements Initializable {
 
 	@FXML
 	private Label slabMinRebar4;
-	
-    @FXML
-    private Label shearFator;
+
+	@FXML
+	private Label shearFator;
 
 	@FXML
 	private Label rcSlabVu1;

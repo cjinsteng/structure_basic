@@ -67,7 +67,7 @@
 		</HBox>
 	</bottom>
 	<left>
-		<ListView maxHeight="1.7976931348623157E308" prefWidth="200.0" BorderPane.alignment="CENTER" />
+		<ListView fx:id="slabList" maxHeight="1.7976931348623157E308" onMouseClicked="#onListClick" prefWidth="200.0" BorderPane.alignment="CENTER" />
 	</left>
 	<center>
 		<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
