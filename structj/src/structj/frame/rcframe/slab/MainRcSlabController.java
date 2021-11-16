@@ -17,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -29,8 +30,8 @@ public class MainRcSlabController implements Initializable {
 
 	//
 
-	@FXML
-	private ListView<String> slabList;
+    @FXML
+    private TableView<String> slabList;
 
 	@FXML
 	public TextField rcSlabName;
@@ -198,7 +199,7 @@ public class MainRcSlabController implements Initializable {
 		rebarDia1.setItems(list);
 		rebarDia2.setItems(list2);
 		rebarDia0.setItems(list0);
-		slabList.getItems().add("S1");
+//		slabList.getItems().add("S1");
 
 		rcSlabWay1Table.setVisible(false);
 		rcSlabWay2Table.setVisible(false);
@@ -620,9 +621,15 @@ public class MainRcSlabController implements Initializable {
 	}
 	
 	String[][] data;
+	
 	public void db() {
 		int co = slabList.getItems().toString().length();
-		data[co][0] = "3";
+		data[co][0] = Integer.toString(co);
+		data[co][1] = rcSlabName.getText();
+		data[co][2] = rcSlabCon.getText();
+		data[co][3] = rebarDia1.getValue();
+		data[co][4] = rebarDia2.getValue();
+		
 	
 	}
 
@@ -632,10 +639,15 @@ public class MainRcSlabController implements Initializable {
 		// ObservableList<String> selectlist = slabList.get;
 		// System.out.println(selectlist);
 		Object obj = slabList.getSelectionModel().getSelectedItem();
+		Object obj3 = slabList.getRowFactory();
+		Object obj4 = slabList.itemsProperty().toString();
 		String obj2 = slabList.getSelectionModel().getSelectedItem().toString();
 		System.out.println(obj);
 		System.out.println(obj2);
+		System.out.println(obj3);
+		System.out.println(obj4);
 		System.out.println(slabList.getItems().toString());
+		
 	}
 
 	@FXML
