@@ -71,8 +71,8 @@
 	<left>
 		<TableView fx:id="slabList" onMouseClicked="#onListClick" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<columns>
-				<TableColumn editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="NO." />
-				<TableColumn maxWidth="160.0" minWidth="100.0" prefWidth="160.0" text="Name" />
+				<TableColumn fx:id="tableColumn1" editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="NO." />
+				<TableColumn fx:id="tableColumn2" maxWidth="160.0" minWidth="100.0" prefWidth="160.0" text="Name" />
 			</columns>
 		</TableView>
 	</left>

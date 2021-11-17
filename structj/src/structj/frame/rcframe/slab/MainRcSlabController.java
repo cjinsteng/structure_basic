@@ -17,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -31,7 +32,13 @@ public class MainRcSlabController implements Initializable {
 	//
 
     @FXML
-    private TableView<String> slabList;
+    private TableView<CalculateSlab> slabList;
+    
+    @FXML
+    private TableColumn tableColumn1;
+
+    @FXML
+    private TableColumn tableColumn2;
 
 	@FXML
 	public TextField rcSlabName;
@@ -616,7 +623,7 @@ public class MainRcSlabController implements Initializable {
 
 		// slabList.setItems(FXCollections.observableArrayList()); //list초기화
 
-		slabList.getItems().add(slabname);
+		slabList.getColumns();
 
 	}
 	
